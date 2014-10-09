@@ -12,3 +12,16 @@ http://startapy.ru/%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-
 
 Контроллер:
 http://aeroquad.com/
+
+
+Руководство по сборке рамы f450
+
+http://www.youtube.com/watch?v=pUTHIL_Xfcc
+
+http://download.dji-innovations.com/downloads/flamewheel/en/F450_User_Manual_v2.1_en.pdf
+
+Рекомендации по установке APM 2.6 на f450
+
+http://ardupilot.com/wp-content/uploads/downloads/2013/04/APM2_Flamewheel_Quad_Setup1.pdf
+
+http://www.youtube.com/watch?v=rqCS6YDE7KI
