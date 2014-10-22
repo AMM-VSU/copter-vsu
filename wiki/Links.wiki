@@ -36,3 +36,6 @@ http://ardupilot-mega.ru/wiki/arducopter/index.html
 http://life-prog.ru/view_msinv.php?id=132
 
 http://olegkop.ucoz.com/InfIzmYstr/lekcija_11.pdf
+
+Board overview:
+http://copter.ardupilot.com/wiki/common-apm25-and-26-overview/
