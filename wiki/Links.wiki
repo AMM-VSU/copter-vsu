@@ -25,3 +25,14 @@ http://download.dji-innovations.com/downloads/flamewheel/en/F450_User_Manual_v2.
 http://ardupilot.com/wp-content/uploads/downloads/2013/04/APM2_Flamewheel_Quad_Setup1.pdf
 
 http://www.youtube.com/watch?v=rqCS6YDE7KI
+
+------------------------------------------------------------
+22.10.2014
+
+Переводной сайт с информацией по работе с APM 2.6
+http://ardupilot-mega.ru/wiki/arducopter/index.html
+
+Информация по микромеханическим гироскопам и акселерометрам
+http://life-prog.ru/view_msinv.php?id=132
+
+http://olegkop.ucoz.com/InfIzmYstr/lekcija_11.pdf
