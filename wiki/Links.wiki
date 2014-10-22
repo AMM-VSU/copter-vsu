@@ -39,3 +39,6 @@ http://olegkop.ucoz.com/InfIzmYstr/lekcija_11.pdf
 
 Board overview:
 http://copter.ardupilot.com/wiki/common-apm25-and-26-overview/
+
+Описание Hardware APM-2.6
+http://copter.ardupilot.com/wiki/common-apm25-and-26-overview/
