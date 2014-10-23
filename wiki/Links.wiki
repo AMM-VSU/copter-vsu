@@ -48,3 +48,7 @@ http://copter.ardupilot.com/wiki/common-apm25-and-26-overview/
 
 Исходники прошивки
 https://github.com/diydrones/ardupilot/commit/f6ff1742d5f3313ee84c8d174004e183a288c059
+
+Как собрать проект:
+https://github.com/diydrones/ardupilot
+http://dev.ardupilot.com/wiki/building-ardupilot-with-arduino-windows/
