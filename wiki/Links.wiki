@@ -42,3 +42,9 @@ http://copter.ardupilot.com/wiki/common-apm25-and-26-overview/
 
 Описание Hardware APM-2.6
 http://copter.ardupilot.com/wiki/common-apm25-and-26-overview/
+
+-------------------------------------------------------------
+23/10/2014
+
+Исходники прошивки
+https://github.com/diydrones/ardupilot/commit/f6ff1742d5f3313ee84c8d174004e183a288c059
