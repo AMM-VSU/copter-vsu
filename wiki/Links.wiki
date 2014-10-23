@@ -51,4 +51,5 @@ https://github.com/diydrones/ardupilot/commit/f6ff1742d5f3313ee84c8d174004e183a2
 
 Как собрать проект:
 https://github.com/diydrones/ardupilot
+
 http://dev.ardupilot.com/wiki/building-ardupilot-with-arduino-windows/
