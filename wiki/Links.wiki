@@ -60,6 +60,9 @@ http://dev.ardupilot.com/wiki/building-ardupilot-with-arduino-windows/
 Статьи для разработчиков "с нуля"
 
 http://tm.spbstu.ru/Проект_%22Трикоптер%22
+
 http://habrahabr.ru/post/197878/
+
 http://habrahabr.ru/post/227425/
+
 https://ghowen.me/build-your-own-quadcopter-autopilot/
