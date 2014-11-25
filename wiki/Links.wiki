@@ -53,3 +53,13 @@ https://github.com/diydrones/ardupilot/commit/f6ff1742d5f3313ee84c8d174004e183a2
 https://github.com/diydrones/ardupilot
 
 http://dev.ardupilot.com/wiki/building-ardupilot-with-arduino-windows/
+
+--------------------------------------------------------------
+25/11/2014
+
+Статьи для разработчиков "с нуля"
+
+http://tm.spbstu.ru/Проект_%22Трикоптер%22
+http://habrahabr.ru/post/197878/
+http://habrahabr.ru/post/227425/
+https://ghowen.me/build-your-own-quadcopter-autopilot/
