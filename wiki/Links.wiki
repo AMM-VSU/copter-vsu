@@ -79,7 +79,7 @@ http://aeroquad.com/showthread.php?951-AeroQuad-v1.8-Shield&p=9303
 http://aeroquad.com/showwiki.php?title=Hardware%20Assembly%20v2%201%202%202%20Shield&redirect=no
 
 Установка инерциальных датчиков 
-http://aeroquad.com/showwiki.php?title=Images:9DOF+Mounted.jpg
+"http://aeroquad.com/showwiki.php?title=Images:9DOF+Mounted.jpg"
 
 2.Информация по MPU6050.
 http://playground.arduino.cc/Main/MPU-6050
