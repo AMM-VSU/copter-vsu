@@ -105,7 +105,7 @@ http://playground.arduino.cc/Code/PIDLibrary
 
 4. Соответствие выводов платы aeroquad и arduino
 
-AeroQuad(v 1.8)			Arduino UNO
+AeroQuad(v 1.8)		->	Arduino UNO
 
 Мотор1 (или серво трикоптера)->	        D3
 
@@ -117,7 +117,7 @@ AeroQuad(v 1.8)			Arduino UNO
 
 
 
-Приемник (PWM)			        Arduino UNO
+Приемник (PWM)		->	        Arduino UNO
 
 Roll->					D2
 
