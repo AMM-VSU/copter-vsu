@@ -119,17 +119,17 @@ AeroQuad (shild v 1.8)			Arduino UNO
 
 Приемник (PWM)			        Arduino UNO
 
-Roll					D2
+Roll->					D2
 
-Throttle				D4
+Throttle->				D4
 
-Pitch					D5
+Pitch	->				D5
 
-Yaw					D6
+Yaw	->				D6
 
-Mode					D7
+Mode	->				D7
 
-Aux1					D8
+Aux1	->				D8
 
 
 
@@ -137,6 +137,4 @@ Aux1					D8
 #include <Receiver_328p.h>
 --------------------------------------------------------------
  	
-
-
 
