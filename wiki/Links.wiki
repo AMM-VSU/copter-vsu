@@ -66,3 +66,66 @@ http://habrahabr.ru/post/197878/
 http://habrahabr.ru/post/227425/
 
 https://ghowen.me/build-your-own-quadcopter-autopilot/
+--------------------------------------------------------------
+29/11/2014
+
+Стартовая информация по элементам
+
+1.Примеры расширения для ардуины с датчиками.
+Общий вид 
+http://aeroquad.com/showthread.php?951-AeroQuad-v1.8-Shield&p=9303
+
+Процесс сборки и установки оборудования 
+http://aeroquad.com/showwiki.php?title=Hardware%20Assembly%20v2%201%202%202%20Shield&redirect=no
+
+Установка инерциальных датчиков 
+http://aeroquad.com/showwiki.php?title=Images:9DOF+Mounted.jpg
+
+2.Информация по MPU6050.
+http://playground.arduino.cc/Main/MPU-6050
+
+Статья с рабочим примером 
+http://www.geekmomprojects.com/gyroscopes-and-accelerometers-on-a-chip/
+
+На русском языке 
+http://robot-kit.ru/product_info.php/info/p587_Modul-GY-521-yeto-trehosnyi-akselerometr-i-3-h-osevoi-giroskop-dlya-Arduino-na-mikrosheme-MPU-6050--Module-3-Axis-Gyroscope-and-Accelerometer-for-Arduino--RKP-GY-521-MPU6050-.html
+
+Другой модуль, но пусть будет 
+http://www.instructables.com/id/Guide-to-gyro-and-accelerometer-with-Arduino-inclu/
+
+Может поможет, может нет, а вдруг, но русском языке
+http://arduino.ru/forum/apparatnye-voprosy/giroskop-gy-521-na-osnove-mpu-6050
+
+3. Информация по PID регулятору.
+Статья с конкретным примером 
+http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-introduction/
+
+Библиотека для arduino 
+http://playground.arduino.cc/Code/PIDLibrary
+
+4. Соответствие выводов платы aeroquad и arduino
+
+AeroQuad (shild v 1.8)			Arduino UNO
+
+Мотор1 (или серво трикоптера)->	        D3
+Мотор2 ->				D9
+Мотор3 ->				D10
+Мотор4 ->				D11
+
+Приемник (PWM)			        Arduino UNO
+Roll					D2
+Throttle				D4
+Pitch					D5
+Yaw					D6
+Mode					D7
+Aux1					D8
+
+Чтобы работало, необходимо убрать комментарий у строчки 
+#include <Receiver_328p.h>
+--------------------------------------------------------------
+ 	
+
+
+
+
+
