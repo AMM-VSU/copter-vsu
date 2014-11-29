@@ -108,24 +108,35 @@ http://playground.arduino.cc/Code/PIDLibrary
 AeroQuad (shild v 1.8)			Arduino UNO
 
 Мотор1 (или серво трикоптера)->	        D3
+
 Мотор2 ->				D9
+
 Мотор3 ->				D10
+
 Мотор4 ->				D11
 
+
+
 Приемник (PWM)			        Arduino UNO
+
 Roll					D2
+
 Throttle				D4
+
 Pitch					D5
+
 Yaw					D6
+
 Mode					D7
+
 Aux1					D8
+
+
 
 Чтобы работало, необходимо убрать комментарий у строчки 
 #include <Receiver_328p.h>
 --------------------------------------------------------------
  	
-
-
 
 
 
