@@ -59,3 +59,16 @@ Mode -> D7
 Aux1 -> D8 
 
 Чтобы работало, необходимо убрать комментарий у строчки #include <Receiver_328p.h>
+
+
+--------------------------------------------------------------
+07/12/2014
+
+MPU6050
+
+DataSheet 
+http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Components/General%20IC/PS-MPU-6000A.pdf
+
+Register map
+
+http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf
