@@ -1,6 +1,4 @@
-#summary One-sentence summary of this page.
-
-Общие заказы
+#summary Общие заказы
 
 Add your content here.
 
