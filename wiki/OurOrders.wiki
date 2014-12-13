@@ -8,7 +8,7 @@ Add your content here.
 *Заказ 1*
 
 Михаил:
- * Рама карбоновая FPV
+ * Рама карбоновая FPV: QAV250 250mm Mini FPV Quadcopter Carbon Fiber Frame Kit QAV250 
  * Регуляторы хода
  * Двигатели
  * Винты
