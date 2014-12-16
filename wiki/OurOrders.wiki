@@ -11,7 +11,7 @@
 
 Михаил:
  * Рама карбоновая FPV 1 шт. 2090р.: [http://www.banggood.com/ru/QAV250-250mm-Mini-FPV-Quadcopter-Carbon-Fiber-Frame-Kit-QAV250-p-941819.html QAV250 250mm Mini FPV Quadcopter Carbon Fiber Frame Kit]
- * Регуляторы хода 20А 4 шт. 580р.х4: [http://www.banggood.com/ru/Emax-Simonk-Series-12A-20A-25A-30A-40A-ESC-For-Quadcopter-QAV-250-p-918126.html Emax Simonk Series]
+ * Регуляторы хода 12А 4 шт. 580р.х4: [http://www.banggood.com/ru/Emax-Simonk-Series-12A-20A-25A-30A-40A-ESC-For-Quadcopter-QAV-250-p-918126.html Emax Simonk Series]
  * Двигатели 4 шт. 660р.х4: [https://www.banggood.com/ru/DYS-BE1806-2300KV-Brushless-Motor-2-3S-for-Mini-Multicopters-p-933192.html DYS BE1806 2300KV]
  * Винты 4 + 4 запасных 150р.х2 [https://www.banggood.com/ru/Gemfan-5x3-Inch-Plastic-5030-Propeller-CWCCW-For-240-250-Frame-p-956935.html Gemfan 5x3 Inch]
  * Ардуино Мега 1 шт.
