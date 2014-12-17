@@ -15,7 +15,7 @@
  * Двигатели 4 шт. 660р.х4: [https://www.banggood.com/ru/DYS-BE1806-2300KV-Brushless-Motor-2-3S-for-Mini-Multicopters-p-933192.html DYS BE1806 2300KV]
  * Винты 4 + 4 запасных 150р.х2: [https://www.banggood.com/ru/Gemfan-5x3-Inch-Plastic-5030-Propeller-CWCCW-For-240-250-Frame-p-956935.html Gemfan 5x3 Inch]
  * Ардуино Мега 1 шт. - уже купил
- * Шилд на Ардуино 1 шт.
+ * Шилд на Ардуино 1 шт. 243р.: [http://www.banggood.com/ru/Mega2560-1280-Proto-Shield-V3-Proto-Expansion-Board-With-Breadboard-p-916227.html Mega2560 1280 Proto Shield V3]
  * Гироскоп/акселерометр 1 шт.
  * Приёмопередатчик для телеметрии 1 шт.
  * Крепёж?
