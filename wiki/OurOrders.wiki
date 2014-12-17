@@ -34,13 +34,23 @@
 
 Заказ A
 Рама карбоновая FPV 1 шт. US$30.99: QAV250 250mm Mini FPV Quadcopter Carbon Fiber Frame Kit 
+
 Регуляторы хода 12А 4 шт. US$32.92: Emax Simonk Series 
+
 Двигатели 4 шт. US$37.56: DYS BE1806 2300KV 
+
 Винты 4 + 4 запасных US$4.44: Gemfan 5x3 Inch
+
 Итого:US$105.91
 
+
+
 Заказ B
+
 Шилд на Ардуино 1 шт. US$3.60: Mega2560 1280 Proto Shield V3 
+
 Гироскоп/акселерометр 1 шт. US$5.26: 2Pcs 6DOF MPU-6050 3 Axis Gyro Accelerometer Sensor Module For Arduino 
+
 Приёмопередатчик для телеметрии 1 шт. US$29.50: APC220 Wireless Data Communication Module USB Adapter Kit For Arduino
+
 Итого:US$38.36
