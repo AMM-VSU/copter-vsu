@@ -16,8 +16,8 @@
  * Винты 4 + 4 запасных 150р.х2: [https://www.banggood.com/ru/Gemfan-5x3-Inch-Plastic-5030-Propeller-CWCCW-For-240-250-Frame-p-956935.html Gemfan 5x3 Inch]
  * Ардуино Мега 1 шт. - уже купил
  * Шилд на Ардуино 1 шт. 243р.: [http://www.banggood.com/ru/Mega2560-1280-Proto-Shield-V3-Proto-Expansion-Board-With-Breadboard-p-916227.html Mega2560 1280 Proto Shield V3]
- * Гироскоп/акселерометр 1 шт.
- * Приёмопередатчик для телеметрии 1 шт.
+ * Гироскоп/акселерометр 1 шт. 355р.: [http://www.banggood.com/ru/2Pcs-6DOF-MPU-6050-3-Axis-Gyro-Accelerometer-Sensor-Module-For-Arduino-p-946033.html 2Pcs 6DOF MPU-6050 3 Axis Gyro Accelerometer Sensor Module For Arduino]
+ * Приёмопередатчик для телеметрии 1 шт. 1989р.: [http://www.banggood.com/ru/APC220-Wireless-Data-Communication-Module-USB-Adapter-Kit-For-Arduino-p-939407.html APC220 Wireless Data Communication Module USB Adapter Kit For Arduino]
  * Крепёж?
 
 Иван:
