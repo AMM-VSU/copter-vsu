@@ -17,7 +17,8 @@
  * Ардуино Мега 1 шт. - уже купил
  * Шилд на Ардуино 1 шт. 243р.: [http://www.banggood.com/ru/Mega2560-1280-Proto-Shield-V3-Proto-Expansion-Board-With-Breadboard-p-916227.html Mega2560 1280 Proto Shield V3]
  * Гироскоп/акселерометр 1 шт. 355р.: [http://www.banggood.com/ru/2Pcs-6DOF-MPU-6050-3-Axis-Gyro-Accelerometer-Sensor-Module-For-Arduino-p-946033.html 2Pcs 6DOF MPU-6050 3 Axis Gyro Accelerometer Sensor Module For Arduino]
- * Приёмопередатчик для телеметрии 1 шт. 1989р.: [http://www.banggood.com/ru/APC220-Wireless-Data-Communication-Module-USB-Adapter-Kit-For-Arduino-p-939407.html APC220 Wireless Data Communication Module USB Adapter Kit For Arduino]
+ * Приёмопередатчик для телеметрии 0 шт. 1989р.: [http://www.banggood.com/ru/APC220-Wireless-Data-Communication-Module-USB-Adapter-Kit-For-Arduino-p-939407.html APC220 Wireless Data Communication Module USB Adapter Kit For Arduino] - дорого пока
+ * Защита винтов 1 комплект 349р.: [http://www.banggood.com/ru/Diatone-Glass-Fiber-Propeller-Protective-Guard-For-200-250-Quadcopter-p-947803.html Diatone Glass Fiber Propeller Protective Guard For 200 250 Quadcopter]
  * Крепёж?
 
 Иван:
@@ -52,6 +53,6 @@
 
 Гироскоп/акселерометр 1 шт. US$5.26: 2Pcs 6DOF MPU-6050 3 Axis Gyro Accelerometer Sensor Module For Arduino 
 
-Приёмопередатчик для телеметрии 1 шт. US$29.50: APC220 Wireless Data Communication Module USB Adapter Kit For Arduino
+Приёмопередатчик для телеметрии 1 шт. US$29.50: APC220 Wireless Data Communication Module USB Adapter Kit For Arduino - пока не надо, дорого
 
 Итого:US$38.36
