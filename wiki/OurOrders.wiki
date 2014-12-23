@@ -43,6 +43,8 @@
 
 Винты 4 + 4 запасных US$4.44: Gemfan 5x3 Inch
 
+Защита US$4.99 Diatone Glass Fiber Propeller Protective Guard For 200 250 Quadcopter 
+
 Итого:US$105.91
 
 
@@ -52,7 +54,5 @@
 Шилд на Ардуино 1 шт. US$3.60: Mega2560 1280 Proto Shield V3 
 
 Гироскоп/акселерометр 1 шт. US$5.26: 2Pcs 6DOF MPU-6050 3 Axis Gyro Accelerometer Sensor Module For Arduino 
-
-Приёмопередатчик для телеметрии 1 шт. US$29.50: APC220 Wireless Data Communication Module USB Adapter Kit For Arduino - пока не надо, дорого
 
 Итого:US$38.36
