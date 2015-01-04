@@ -72,3 +72,10 @@ http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Components/General%20IC/PS-MPU-60
 Register map
 
 http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf
+
+--------------------------------------------------------------
+04.01.2015
+
+Информация по фильтрам
+
+http://www.starlino.com/dcm_tutorial.html
