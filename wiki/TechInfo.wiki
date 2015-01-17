@@ -81,3 +81,12 @@ http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Sensors/Accelerometers/RM-MPU-600
 http://www.starlino.com/dcm_tutorial.html
 
 http://www.rossprogrammproduct.com/translations/Matrix%20and%20Quaternion%20FAQ.htm
+
+--------------------------------------------------------------
+17/01/2015
+
+По навигации
+
+http://keldysh.ru/papers/2013/prep2013_39.pdf
+
+Стр.13 определение углов Крылова (самолетных) по компонентам кватерниона
