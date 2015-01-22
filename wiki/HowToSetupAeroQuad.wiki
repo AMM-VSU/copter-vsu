@@ -16,6 +16,7 @@
 Загрузить !AeroQuad в контроллер: http://aeroquad.com/showwiki.php?title=Uploading+via+the+Arduino+IDE
 
 
+
 Настройки в !UserConfiguration.h:
 
 #define !AeroQuadMega_v21
