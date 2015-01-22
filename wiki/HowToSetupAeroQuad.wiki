@@ -10,3 +10,5 @@
 Скачать исходный код !AeroQuad: https://github.com/AeroQuad/AeroQuad
 
 Скачать !AeroQuad Configurator: http://code.google.com/p/aeroquad/downloads/list
+
+Описание по шагам: http://aeroquad.com/showwiki.php?title=Book:Arduino-based+boards
