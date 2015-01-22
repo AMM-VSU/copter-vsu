@@ -1,4 +1,4 @@
-#summary Как запустить AeroQuad.
+#summary Как запустить AeroQuad
 
 = Introduction =
 
