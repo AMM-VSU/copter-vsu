@@ -2,9 +2,9 @@
 
 = Introduction =
 
-Рассмотрим, как запустить и настроить программу AeroQuad на Arduino Mega.
+Рассмотрим, как запустить и настроить программу !AeroQuad на Arduino Mega.
 
 
 = Details =
 
-Скачать исходный код AeroQuad https://github.com/AeroQuad/AeroQuad
+Скачать исходный код !AeroQuad: https://github.com/AeroQuad/AeroQuad
