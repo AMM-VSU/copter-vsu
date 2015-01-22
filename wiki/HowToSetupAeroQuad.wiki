@@ -13,4 +13,4 @@
 
 Скачать !AeroQuad Configurator: http://code.google.com/p/aeroquad/downloads/list
 
-Загрузить !AeroQuad в контроллер как написано здесь: http://aeroquad.com/showwiki.php?title=Uploading+via+the+Arduino+IDE
+Загрузить !AeroQuad в контроллер: http://aeroquad.com/showwiki.php?title=Uploading+via+the+Arduino+IDE
