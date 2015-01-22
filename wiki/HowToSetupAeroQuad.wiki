@@ -9,4 +9,4 @@
 
 Скачать исходный код !AeroQuad: https://github.com/AeroQuad/AeroQuad
 
-Скачать AeroQuad Configurator: http://code.google.com/p/aeroquad/downloads/list
+Скачать !AeroQuad Configurator: http://code.google.com/p/aeroquad/downloads/list
