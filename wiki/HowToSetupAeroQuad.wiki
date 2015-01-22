@@ -21,4 +21,4 @@
 
 #define !AeroQuadMega_v21
 
-#define !quadXConfig
+#define quadXConfig
