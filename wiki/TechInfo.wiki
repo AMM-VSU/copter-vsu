@@ -90,3 +90,12 @@ http://www.rossprogrammproduct.com/translations/Matrix%20and%20Quaternion%20FAQ.
 http://keldysh.ru/papers/2013/prep2013_39.pdf
 
 Стр.13 определение углов Крылова (самолетных) по компонентам кватерниона
+
+--------------------------------------------------------------
+22.01.2015
+
+AeroQuad и mpu6050
+
+http://www.youtube.com/watch?v=zDde6YCixm4
+
+--------------------------------------------------------------
