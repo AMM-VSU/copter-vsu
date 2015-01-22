@@ -7,8 +7,10 @@
 
 = Details =
 
+Подробное описание по шагам: http://aeroquad.com/showwiki.php?title=Book:Arduino-based+boards
+
 Скачать исходный код !AeroQuad: https://github.com/AeroQuad/AeroQuad
 
 Скачать !AeroQuad Configurator: http://code.google.com/p/aeroquad/downloads/list
 
-Описание по шагам: http://aeroquad.com/showwiki.php?title=Book:Arduino-based+boards
+Загрузить !AeroQuad в контроллер как написано здесь: http://aeroquad.com/showwiki.php?title=Uploading+via+the+Arduino+IDE
