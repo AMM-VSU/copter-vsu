@@ -17,11 +17,7 @@
 
 -
 
-Настройки в !UserConfiguration.h:
-
-#define !AeroQuadMega_v21
-
-#define quadXConfig
+Здесь будет ссылка на мой !UserConfiguration.h:
 
 -
 
