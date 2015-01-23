@@ -19,7 +19,7 @@
 
 Здесь будет ссылка на мой !UserConfiguration.h
 
-Для использования гироакселерометра MPU6050 необходимо внести изменения в код. [http://www.youtube.com/watch?v=zDde6YCixm4 Видео, как это сделать]
+Для использования гироакселерометра [http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Components/General%20IC/PS-MPU-6000A.pdf MPU6050] необходимо внести изменения в код. [http://www.youtube.com/watch?v=zDde6YCixm4 Видео, как это сделать]
 
 -
 
