@@ -58,6 +58,31 @@ Mode -> D7
 
 Aux1 -> D8 
 
+
+AeroQuad(v 2.0) -> Arduino MEGA
+
+Мотор1 (или серво трикоптера)-> D2 
+
+Мотор2 -> D3 
+
+Мотор3 -> D5 
+
+Мотор4 -> D6 
+
+Приемник (PWM) -> Arduino MEGA 
+
+Roll-> A9 
+
+Throttle-> A8 
+
+Pitch -> A10 
+
+Yaw -> A11 
+
+Mode -> A12 
+
+
+
 Чтобы работало, необходимо убрать комментарий у строчки #include <Receiver_328p.h>
 
 
