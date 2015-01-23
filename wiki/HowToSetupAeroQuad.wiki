@@ -33,3 +33,5 @@
 красный - плюс,
 
 белый/жёлтый - сигнал
+
+[https://docs.google.com/spreadsheet/ccc?key=0AoZ5bZF0qNerdDBPdjQ5cm1GU2Y0ZHBxa2FaZmVYeVE&authkey=CJP8mtsF&hl=en&authkey=CJP8mtsF#gid=0 РАСПИНОВКА]
