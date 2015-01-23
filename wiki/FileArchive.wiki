@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Add your content here.
+Здесь можно оставить ссылки на файлы.
 
 
 = Details =
