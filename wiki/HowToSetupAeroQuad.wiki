@@ -21,6 +21,8 @@
 
 Для использования гироакселерометра [http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Components/General%20IC/PS-MPU-6000A.pdf MPU6050] необходимо внести изменения в код. [http://www.youtube.com/watch?v=zDde6YCixm4 Видео, как это сделать]
 
+Добавление initializeMPU6000Sensors() в функцию initPlatform и readMPU6000Sensors() в measureCriticalSensors, как показано в видео, на самом деле не требуется, они и так вызываются - проверено.
+
 -
 
 Подключение приёмника (receiver) и регуляторов хода (ESC): 
