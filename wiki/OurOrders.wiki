@@ -68,3 +68,5 @@
  * Приёмопередатчик для телеметрии [http://www.banggood.com/ru/APC220-Wireless-Data-Communication-Module-USB-Adapter-Kit-For-Arduino-p-939407.html APC220 Wireless Data Communication Module USB Adapter Kit For Arduino]
 
  * GPS
+
+ * Ультразвуковой датчик
