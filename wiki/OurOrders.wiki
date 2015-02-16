@@ -61,8 +61,4 @@
 
 *Для следующего заказа*
 
-Разъёмы [http://www.banggood.com/ru/10X-2mm-Gold-Bullet-Banana-Connector-Plug-For-ESC-Battery-Motor-p-946666.html 10 Pairs 2mm Gold Bullet Banana Connector Plug For ESC Battery Motor]
-
-Ещё разъёмы [http://www.banggood.com/ru/3_5mm-Gold-Bullet-Banana-Connector-Plug-For-ESC-Battery-Motor-p-915892.html 3.5mm Gold Bullet Banana Connector Plug For ESC Battery Motor]
-
-Плата раздачи питания [http://www.banggood.com/ru/KK-MultiCopter-Multi-Tri-TWIN-Copter-ESC-Speed-Controller-Board-p-78607.html KK MultiCopter Multi-Tri TWIN Copter ESC Speed Controller Board ]
+Программатор регуляторов хода [http://www.banggood.com/ru/EMAX-Program-card-for-Simonk-series-ESC-and-4-IN-1-ESC-p-936813.html EMAX Program Card For Emax Simonk Series ESC and 4 IN 1 ESC]
