@@ -66,3 +66,10 @@ http://habrahabr.ru/post/197878/
 http://habrahabr.ru/post/227425/
 
 https://ghowen.me/build-your-own-quadcopter-autopilot/
+
+--------------------------------------------------------------
+17/02/2015
+
+Преобразователь RC приёмник -> USB джойстик:
+
+https://sites.google.com/site/elriediy/rc-emulator-training-with-arduino
