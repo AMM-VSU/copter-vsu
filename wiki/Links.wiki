@@ -70,6 +70,6 @@ https://ghowen.me/build-your-own-quadcopter-autopilot/
 --------------------------------------------------------------
 17/02/2015
 
-Преобразователь RC приёмник -> USB джойстик:
+Преобразователь RC приёмник -> USB джойстик (опробован с RC Desk Pilot или BMI Flight Simulator):
 
 https://sites.google.com/site/elriediy/rc-emulator-training-with-arduino
