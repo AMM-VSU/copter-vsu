@@ -70,3 +70,5 @@
  * GPS
 
  * Ультразвуковой датчик
+
+ * Лазерный датчик [http://www.dfrobot.com/index.php?route=product/product&path=36_55&product_id=1125 360 Degree Laser Scanner Development Kit (RPLIDAR)]
