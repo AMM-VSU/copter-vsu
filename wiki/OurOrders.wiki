@@ -74,3 +74,5 @@
  * Лазерный датчик [http://www.dfrobot.com/index.php?route=product/product&path=36_55&product_id=1125 360 Degree Laser Scanner Development Kit (RPLIDAR)]
 
  * Светодиодная лента, красная и белая
+
+ * Комплект: видео-камера, передатчик, приёмник, меню.
