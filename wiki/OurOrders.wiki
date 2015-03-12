@@ -68,6 +68,7 @@
  * Приёмопередатчик для телеметрии [http://www.banggood.com/ru/APC220-Wireless-Data-Communication-Module-USB-Adapter-Kit-For-Arduino-p-939407.html APC220 Wireless Data Communication Module USB Adapter Kit For Arduino]
 
  * GPS
+http://www.banggood.com/GY-NEO6MV2-Flight-Controller-GPS-Module-For-Arduino-EEPROM-MWC-APM-2_5-p-915384.html
 
  * Ультразвуковой датчик [http://www.banggood.com/2Pcs-HC-SR04-Ultrasonic-Ranging-Sensor-Ultrasonic-Module-For-Arduino-p-943141.html 2Pcs HC-SR04 Ultrasonic Ranging Sensor Ultrasonic Module For Arduino]
 
@@ -76,6 +77,10 @@
  * Светодиодная лента, красная и белая
 
  * Комплект: видео-камера, передатчик, приёмник, OSD меню.
+
+http://www.banggood.com/Boscam-FPV-5_8G-600mW-32CH-Wireless-Transmitter-Receiver-TS832-RC832-p-84771.html
+
+http://www.banggood.com/DAL-700TVL-FPV-HD-14-COMS-Camera-Module-Wide-Angle-p-957174.html
 
 [http://www.banggood.com/MinimOSD-MAVLink-OSD-APM-APM2-Flight-Control-Board-p-73436.html MinimOSD MAVLink OSD APM 2.6 APM 2.52 Flight Control Board]
  
