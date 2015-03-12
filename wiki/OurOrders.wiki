@@ -68,7 +68,7 @@
  * Приёмопередатчик для телеметрии [http://www.banggood.com/ru/APC220-Wireless-Data-Communication-Module-USB-Adapter-Kit-For-Arduino-p-939407.html APC220 Wireless Data Communication Module USB Adapter Kit For Arduino]
 
  * GPS
-http://www.banggood.com/GY-NEO6MV2-Flight-Controller-GPS-Module-For-Arduino-EEPROM-MWC-APM-2_5-p-915384.html
+
 
  * Ультразвуковой датчик [http://www.banggood.com/2Pcs-HC-SR04-Ultrasonic-Ranging-Sensor-Ultrasonic-Module-For-Arduino-p-943141.html 2Pcs HC-SR04 Ultrasonic Ranging Sensor Ultrasonic Module For Arduino]
 
