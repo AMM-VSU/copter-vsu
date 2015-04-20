@@ -53,8 +53,8 @@ https://github.com/diydrones/ardupilot/commit/f6ff1742d5f3313ee84c8d174004e183a2
 https://github.com/diydrones/ardupilot
 
 http://dev.ardupilot.com/wiki/building-ardupilot-with-arduino-windows/
+------------------------------------------------------------
 
---------------------------------------------------------------
 25/11/2014
 
 Статьи для разработчиков "с нуля"
@@ -75,3 +75,9 @@ https://ghowen.me/build-your-own-quadcopter-autopilot/
 https://sites.google.com/site/elriediy/rc-emulator-training-with-arduino
 
 https://sites.google.com/site/elriediy/rc-emulator-training-with-arduino-part-2
+
+--------------------------------------------------------------
+20/04/2015
+Статья по базовым элементам коптера http://habrahabr.ru/post/227425/
+Математическая модель ПИД регулятора (ссылка из статьи выше) http://copterpilot.ru/blog/o-pid-regulyatorax/
+
