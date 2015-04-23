@@ -9,7 +9,7 @@ namespace Scada.Comm.KP
         public KpAeroQuadLogic(int number)
             : base(number)
         {
-            InitArrays(2, 0);
+            InitArrays(11, 0);
             KPParams[0] = new Param(1, "Связь");
             KPParams[1] = new Param(2, "Принятых сообщений");
             KPParams[2] = new Param(3, "Roll Gyro Rate");
