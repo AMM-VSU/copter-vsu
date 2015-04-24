@@ -6,9 +6,16 @@ namespace Scada.Comm.KP
 {
     public class KpAeroQuadLogic : KPLogic
     {
+        private const int InBufSize = 100; // размер буфера входных данных
+        private byte[] inBuf;              // буфер входных данных
+
+
         public KpAeroQuadLogic(int number)
             : base(number)
         {
+            inBuf = new byte[InBufSize]; 
+
+            // инициализация тегов КП
             InitArrays(11, 0);
             KPParams[0] = new Param(1, "Связь");
             KPParams[1] = new Param(2, "Принятых сообщений");
@@ -26,6 +33,20 @@ namespace Scada.Comm.KP
         public override void Session()
         {
             base.Session();
+
+            // проверка доступности последовательного порта
+            if (SerialPort == null)
+                lastCommSucc = false;
+
+            // чтение данных пока не будет получен конец строки, заполнен буфер или превышен таймаут
+            string logText;
+            KPUtils.ReadFromSerialPort(SerialPort, inBuf, 0, InBufSize, 0x0D, KPReqParams.Timeout, 
+                false, KPUtils.SerialLogFormat.String, out logText);
+            WriteToLog(logText);
+
+            // завершение запроса и расчёт статистики
+            FinishRequest();
+            CalcSessStats();
         }
     }
 }
