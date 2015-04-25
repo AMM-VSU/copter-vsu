@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Scada.Comm.KP
 {
@@ -47,6 +48,35 @@ namespace Scada.Comm.KP
             // завершение запроса и расчёт статистики
             FinishRequest();
             CalcSessStats();
+        }
+
+        public override void SendCmd(KPLogic.Command cmd)
+        {
+            base.SendCmd(cmd);
+            lastCommSucc = false;
+
+            if (cmd.CmdNum == 1 && cmd.CmdType == CmdType.Binary)
+            {
+                if (cmd.CmdData != null && cmd.CmdData.Length > 0)
+                {
+                    // отправка данных команды
+                    string logText;
+                    KPUtils.WriteToSerialPort(SerialPort, cmd.CmdData, 0, cmd.CmdData.Length, 
+                        KPUtils.SerialLogFormat.String, out logText);
+                    Thread.Sleep(KPReqParams.Delay);
+                }
+                else
+                {
+                    WriteToLog(KPUtils.NoCommandData);
+                }
+            }
+            else
+            {
+                WriteToLog(KPUtils.IllegalCommand);
+            }
+
+            // расчёт статистики
+            CalcCmdStats();
         }
     }
 }
