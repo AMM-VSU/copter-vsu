@@ -14,6 +14,7 @@ namespace Scada.Comm.KP
         public KpAeroQuadLogic(int number)
             : base(number)
         {
+            // инициализация буфера входных данных
             inBuf = new byte[InBufSize]; 
 
             // инициализация тегов КП
@@ -29,6 +30,9 @@ namespace Scada.Comm.KP
             KPParams[8] = new Param(9, "Mag Raw Value X Axis");
             KPParams[9] = new Param(10, "Mag Raw Value Y Axis");
             KPParams[10] = new Param(11, "Mag Raw Value Z Axis");
+
+            // установка признака возможности отправки команд
+            CanSendCmd = true;
         }
 
         public override void Session()
@@ -41,7 +45,7 @@ namespace Scada.Comm.KP
 
             // чтение данных пока не будет получен конец строки, заполнен буфер или превышен таймаут
             string logText;
-            KPUtils.ReadFromSerialPort(SerialPort, inBuf, 0, InBufSize, 0x0D, KPReqParams.Timeout, 
+            KPUtils.ReadFromSerialPort(SerialPort, inBuf, 0, InBufSize, 0x0A, KPReqParams.Timeout, 
                 false, KPUtils.SerialLogFormat.String, out logText);
             WriteToLog(logText);
 
@@ -63,6 +67,7 @@ namespace Scada.Comm.KP
                     string logText;
                     KPUtils.WriteToSerialPort(SerialPort, cmd.CmdData, 0, cmd.CmdData.Length, 
                         KPUtils.SerialLogFormat.String, out logText);
+                    WriteToLog(logText);
                     Thread.Sleep(KPReqParams.Delay);
                 }
                 else
