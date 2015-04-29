@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.IO.Ports;
 using System.Text;
 using System.Threading;
 
@@ -28,18 +29,19 @@ namespace Scada.Comm.KP
             stream = null;
 
             // инициализация тегов КП
-            InitArrays(11, 0);
+            InitArrays(12, 0);
             KPParams[0] = new Param(1, "Связь");
             KPParams[1] = new Param(2, "Принятых сообщений");
-            KPParams[2] = new Param(3, "Roll Gyro Rate");
-            KPParams[3] = new Param(4, "Pitch Gyro Rate");
-            KPParams[4] = new Param(5, "Yaw Gyro Rate");
-            KPParams[5] = new Param(6, "Accel X Axis");
-            KPParams[6] = new Param(7, "Accel Y Axis");
-            KPParams[7] = new Param(8, "Accel Z Axis");
-            KPParams[8] = new Param(9, "Mag Raw Value X Axis");
-            KPParams[9] = new Param(10, "Mag Raw Value Y Axis");
-            KPParams[10] = new Param(11, "Mag Raw Value Z Axis");
+            KPParams[2] = new Param(3, "Повреждённых сообщений");
+            KPParams[3] = new Param(4, "Roll Gyro Rate");
+            KPParams[4] = new Param(5, "Pitch Gyro Rate");
+            KPParams[5] = new Param(6, "Yaw Gyro Rate");
+            KPParams[6] = new Param(7, "Accel X Axis");
+            KPParams[7] = new Param(8, "Accel Y Axis");
+            KPParams[8] = new Param(9, "Accel Z Axis");
+            KPParams[9] = new Param(10, "Mag Raw Value X Axis");
+            KPParams[10] = new Param(11, "Mag Raw Value Y Axis");
+            KPParams[11] = new Param(12, "Mag Raw Value Z Axis");
 
             // установка признака возможности отправки команд
             CanSendCmd = true;
@@ -55,7 +57,7 @@ namespace Scada.Comm.KP
 
             try
             {
-                int paramIndex = 2; // индекс устанавливаемого тега
+                int paramIndex = 3; // индекс устанавливаемого тега
 
                 if (inBufLen > 0)
                 {
@@ -86,27 +88,20 @@ namespace Scada.Comm.KP
                         // определение успешности обработки данных
                         decodeOK = paramIndex == KPParams.Length;
 
-                        // запись в файл
                         if (decodeOK)
-                            SaveRecord(rec);
+                        {
+                            SetParamData(1, CurData[1].Val + 1, 1); // увеличение счётчика принятых сообщений
+                            SaveRecord(rec); // запись в файл
+                        }
+                        else
+                        {
+                            SetParamData(2, CurData[2].Val + 1, 1); // увеличение счётчика повреждённых сообщений
+                        }
                     }
+                }
 
-                    // установка тегов
-                    if (decodeOK)
-                    {
-                        SetParamData(0, 1.0, 1);                // связь есть
-                        SetParamData(1, CurData[1].Val + 1, 1); // увеличение счётчика сообщений
-                    }
-                    else
-                    {
-                        SetParamData(0, 0.0, 1); // связи нет
-                    }
-                }
-                else
-                {
-                    decodeOK = true;
-                    SetParamData(0, 0.0, 1); // связи нет
-                }
+                // установка тега наличия связи
+                SetParamData(0, decodeOK ? 1.0 : 0.0, 1);
 
                 // установка недостоверности для непринятых тегов
                 for (int i = paramIndex; i < KPParams.Length; i++)
@@ -145,12 +140,104 @@ namespace Scada.Comm.KP
             }
         }
 
+        /// <summary>
+        /// Считать данные из последовательного порта
+        /// </summary>
+        private static int ReadFromSerialPort(SerialPort serialPort, byte[] buffer, int index, int maxCount,
+            byte stopCode, int timeout, bool wait, KPUtils.SerialLogFormat logFormat, out string logText)
+        {
+            int readCnt = 0;
+
+            if (serialPort == null)
+            {
+                logText = KPUtils.ReadDataImpossible;
+            }
+            else
+            {
+                DateTime nowDT = DateTime.Now;
+                DateTime startDT = nowDT;
+                DateTime stopDT = startDT.AddMilliseconds(timeout);
+
+                bool stop = false;
+                int curInd = index;
+                serialPort.ReadTimeout = 100;
+
+                while (readCnt <= maxCount && !stop && startDT <= nowDT && nowDT <= stopDT)
+                {
+                    int read;
+                    try { read = serialPort.Read(buffer, curInd, Math.Min(maxCount - readCnt, serialPort.BytesToRead)); }
+                    catch { read = 0; }
+
+                    if (read > 0)
+                    {
+                        for (int i = curInd, j = 0; j < read && !stop; i++, j++)
+                            stop = buffer[i] == stopCode;
+                        curInd += read;
+                        readCnt += read;
+                    }
+                    else
+                    {
+                        Thread.Sleep(10); // накопление входных данных в буфере порта
+                    }
+
+                    nowDT = DateTime.Now;
+                }
+
+                logText = KPUtils.ReceiveNotation + " (" + readCnt + "): " + (logFormat == KPUtils.SerialLogFormat.Hex ?
+                        KPUtils.BytesToHex(buffer, index, readCnt) : KPUtils.BytesToString(buffer, index, readCnt));
+
+                if (wait && startDT <= nowDT)
+                {
+                    int delay = (int)(stopDT - nowDT).TotalMilliseconds;
+                    if (delay > 0)
+                        Thread.Sleep(delay);
+                }
+            }
+
+            return readCnt;
+        }
+
+        /// <summary>
+        /// Записать данные в последовательный порт
+        /// </summary>
+        private static void WriteToSerialPort(SerialPort serialPort, byte[] buffer, int index, int count,
+            KPUtils.SerialLogFormat logFormat, out string logText)
+        {
+            try
+            {
+                if (serialPort == null)
+                {
+                    logText = KPUtils.WriteDataImpossible;
+                }
+                else
+                {
+                    //serialPort.DiscardInBuffer();
+                    //serialPort.DiscardOutBuffer();
+                    serialPort.Write(buffer, index, count);
+                    logText = KPUtils.SendNotation + " (" + count + "): " + (logFormat == KPUtils.SerialLogFormat.Hex ?
+                        KPUtils.BytesToHex(buffer, index, count) : KPUtils.BytesToString(buffer, index, count));
+                }
+            }
+            catch (Exception ex)
+            {
+                logText = "Ошибка при отправке данных: " + ex.Message;
+            }
+        }
+
+
+        public override void OnCommLineStart()
+        {
+            //if (SerialPort != null)
+            //    SerialPort.Handshake = Handshake.None;
+
+            // инициализация тегов счётчиков
+            SetParamData(1, 0.0, 1);
+            SetParamData(2, 0.0, 1);
+        }
 
         public override void OnCommLineTerminate()
         {
-            base.OnCommLineTerminate();
-
-            if (stream != null)
+             if (stream != null)
                 stream.Close();
         }
 
@@ -166,7 +253,6 @@ namespace Scada.Comm.KP
             WriteToLog(logText);
 
             // чтение данных пока не будет получен конец строки, заполнен буфер или превышен таймаут
-            //string logText;
             inBufLen = KPUtils.ReadFromSerialPort(SerialPort, inBuf, 0, InBufSize, 0x0A, KPReqParams.Timeout, 
                 false, KPUtils.SerialLogFormat.String, out logText);
             WriteToLog(logText);
@@ -217,7 +303,7 @@ namespace Scada.Comm.KP
             {
                 if (signal == 1)
                     return paramData.Val > 0 ? "Есть" : "Нет";
-                else if (signal <= 2)
+                else if (signal == 2 || signal == 3)
                     return paramData.Val.ToString("N0");
             }
 
