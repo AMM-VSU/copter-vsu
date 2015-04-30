@@ -17,6 +17,8 @@ namespace Scada.Comm.KP
         private const int InBufSize = 100; // размер буфера входных данных
         private byte[] inBuf;              // буфер входных данных
         private int inBufLen;              // используемая длина буфера входных данных
+        private int startSec;              // стартовая секунда для расчёта количества сообщений
+        private int msgPerSec;             // счётчик количества сообщений в секунду
         private FileStream stream;         // файловый поток
 
 
@@ -26,22 +28,25 @@ namespace Scada.Comm.KP
             // инициализация полей
             inBuf = new byte[InBufSize];
             inBufLen = 0;
+            startSec = DateTime.Now.Second;
+            msgPerSec = 0;
             stream = null;
 
             // инициализация тегов КП
-            InitArrays(12, 0);
+            InitArrays(13, 0);
             KPParams[0] = new Param(1, "Связь");
             KPParams[1] = new Param(2, "Принятых сообщений");
             KPParams[2] = new Param(3, "Повреждённых сообщений");
-            KPParams[3] = new Param(4, "Roll Gyro Rate");
-            KPParams[4] = new Param(5, "Pitch Gyro Rate");
-            KPParams[5] = new Param(6, "Yaw Gyro Rate");
-            KPParams[6] = new Param(7, "Accel X Axis");
-            KPParams[7] = new Param(8, "Accel Y Axis");
-            KPParams[8] = new Param(9, "Accel Z Axis");
-            KPParams[9] = new Param(10, "Mag Raw Value X Axis");
-            KPParams[10] = new Param(11, "Mag Raw Value Y Axis");
-            KPParams[11] = new Param(12, "Mag Raw Value Z Axis");
+            KPParams[3] = new Param(4, "Сообщений в секунду");
+            KPParams[4] = new Param(5, "Roll Gyro Rate");
+            KPParams[5] = new Param(6, "Pitch Gyro Rate");
+            KPParams[6] = new Param(7, "Yaw Gyro Rate");
+            KPParams[7] = new Param(8, "Accel X Axis");
+            KPParams[8] = new Param(9, "Accel Y Axis");
+            KPParams[9] = new Param(10, "Accel Z Axis");
+            KPParams[10] = new Param(11, "Mag Raw Value X Axis");
+            KPParams[11] = new Param(12, "Mag Raw Value Y Axis");
+            KPParams[12] = new Param(13, "Mag Raw Value Z Axis");
 
             // установка признака возможности отправки команд
             CanSendCmd = true;
@@ -57,10 +62,11 @@ namespace Scada.Comm.KP
 
             try
             {
-                int paramIndex = 3; // индекс устанавливаемого тега
+                int paramIndex = 4; // индекс устанавливаемого тега
 
                 if (inBufLen > 0)
                 {
+                    // распознавание ответа
                     string line = Encoding.Default.GetString(inBuf, 0, inBufLen).TrimEnd();
                     string[] parts = line.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
 
@@ -91,6 +97,7 @@ namespace Scada.Comm.KP
                         if (decodeOK)
                         {
                             SetParamData(1, CurData[1].Val + 1, 1); // увеличение счётчика принятых сообщений
+                            msgPerSec++;     // увеличение счётчика сообщений в секунду
                             SaveRecord(rec); // запись в файл
                         }
                         else
@@ -102,6 +109,15 @@ namespace Scada.Comm.KP
 
                 // установка тега наличия связи
                 SetParamData(0, decodeOK ? 1.0 : 0.0, 1);
+
+                // установка тега количества сообщений в секунду
+                int curSec = DateTime.Now.Second;
+                if (startSec != curSec)
+                {
+                    SetParamData(3, msgPerSec, 1);
+                    startSec = curSec;
+                    msgPerSec = 0;
+                }
 
                 // установка недостоверности для непринятых тегов
                 for (int i = paramIndex; i < KPParams.Length; i++)
@@ -211,8 +227,6 @@ namespace Scada.Comm.KP
                 }
                 else
                 {
-                    //serialPort.DiscardInBuffer();
-                    //serialPort.DiscardOutBuffer();
                     serialPort.Write(buffer, index, count);
                     logText = KPUtils.SendNotation + " (" + count + "): " + (logFormat == KPUtils.SerialLogFormat.Hex ?
                         KPUtils.BytesToHex(buffer, index, count) : KPUtils.BytesToString(buffer, index, count));
@@ -227,12 +241,10 @@ namespace Scada.Comm.KP
 
         public override void OnCommLineStart()
         {
-            //if (SerialPort != null)
-            //    SerialPort.Handshake = Handshake.None;
-
             // инициализация тегов счётчиков
             SetParamData(1, 0.0, 1);
             SetParamData(2, 0.0, 1);
+            SetParamData(3, 0.0, 1);
         }
 
         public override void OnCommLineTerminate()
@@ -246,13 +258,8 @@ namespace Scada.Comm.KP
             base.Session();
             lastCommSucc = false;
 
-            // отправка данных команды
-            string logText;
-            KPUtils.WriteToSerialPort(SerialPort, new byte[] { 0x69, 0x0D, 0x0A }, 0, 3,
-                KPUtils.SerialLogFormat.String, out logText);
-            WriteToLog(logText);
-
             // чтение данных пока не будет получен конец строки, заполнен буфер или превышен таймаут
+            string logText;
             inBufLen = KPUtils.ReadFromSerialPort(SerialPort, inBuf, 0, InBufSize, 0x0A, KPReqParams.Timeout, 
                 false, KPUtils.SerialLogFormat.String, out logText);
             WriteToLog(logText);
@@ -277,7 +284,7 @@ namespace Scada.Comm.KP
                 {
                     // отправка данных команды
                     string logText;
-                    KPUtils.WriteToSerialPort(SerialPort, cmd.CmdData, 0, cmd.CmdData.Length, 
+                    WriteToSerialPort(SerialPort, cmd.CmdData, 0, cmd.CmdData.Length, 
                         KPUtils.SerialLogFormat.String, out logText);
                     WriteToLog(logText);
                     lastCommSucc = true;
@@ -303,7 +310,7 @@ namespace Scada.Comm.KP
             {
                 if (signal == 1)
                     return paramData.Val > 0 ? "Есть" : "Нет";
-                else if (signal == 2 || signal == 3)
+                else if (signal <= 2 && signal <= 4)
                     return paramData.Val.ToString("N0");
             }
 
