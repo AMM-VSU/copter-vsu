@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -7,9 +8,17 @@ namespace Scada.Comm.KP
 {
     public static class FileFormats
     {
-        [StructLayout(LayoutKind.Explicit, Pack = 1, Size = 80)]
-        public struct F01Record
+        public interface IConvertibleToCvs
         {
+            //static string ConvertHeaderToCsv();
+            string ConvertRecordToCvs();
+        }
+
+        [StructLayout(LayoutKind.Explicit, Pack = 1, Size = 80)]
+        public struct F01Record : IConvertibleToCvs
+        {
+            public const int RecSize = 80;
+
             [FieldOffset(0)]
             public long Time;
             [FieldOffset(8)]
@@ -74,7 +83,7 @@ namespace Scada.Comm.KP
 
             public byte[] GetBytes()
             {
-                byte[] bytes = new byte[80];
+                byte[] bytes = new byte[RecSize];
                 BitConverter.GetBytes(Time).CopyTo(bytes, 0);
                 BitConverter.GetBytes(RollGyroRate).CopyTo(bytes, 8);
                 BitConverter.GetBytes(PitchGyroRate).CopyTo(bytes, 16);
@@ -86,6 +95,54 @@ namespace Scada.Comm.KP
                 BitConverter.GetBytes(MagRawValueYAxis).CopyTo(bytes, 64);
                 BitConverter.GetBytes(MagRawValueZAxis).CopyTo(bytes, 72);
                 return bytes;
+            }
+
+            public static F01Record FromBytes(byte[] buffer)
+            {
+                return new F01Record();
+            }
+
+            //public static string ConvertHeaderToCsv()
+            //{
+            //    return "Time;RollGyroRate;PitchGyroRate;YawGyroRate;AccelXAxis;AccelYAxis;AccelZAxis;MagRawValueXAxis;MagRawValueYAxis;MagRawValueZAxis";
+            //}
+
+            public string ConvertRecordToCvs()
+            {
+                return new StringBuilder()
+                    .Append(DateTime.FromBinary(Time).ToLongTimeString()).Append(";")
+                    .Append(RollGyroRate).Append(";")
+                    .Append(PitchGyroRate).Append(";")
+                    .Append(YawGyroRate).Append(";")
+                    .Append(AccelXAxis).Append(";")
+                    .Append(AccelYAxis).Append(";")
+                    .Append(AccelZAxis).Append(";")
+                    .Append(MagRawValueXAxis).Append(";")
+                    .Append(MagRawValueYAxis).Append(";")
+                    .Append(MagRawValueZAxis).Append(";")
+                    .ToString();
+            }
+        }
+
+
+        public static void ConvertF0ToCsv(string srcFileName, string destFileName)
+        {
+            using (FileStream inStream = File.OpenRead(srcFileName))
+            {
+                using (StreamWriter outWriter = File.CreateText(destFileName))
+                {
+                    // вывод заголовка
+                    //outWriter.WriteLine(F01Record.ConvertHeaderToCsv());
+
+                    // вывод записей
+                    byte[] buf = new byte[F01Record.RecSize];
+                    while (inStream.Position < inStream.Length)
+                    {
+                        inStream.Read(buf, 0, F01Record.RecSize);
+                        F01Record rec = F01Record.FromBytes(buf);
+                        outWriter.WriteLine(rec.ConvertRecordToCvs());
+                    }
+                }
             }
         }
     }
