@@ -15,7 +15,7 @@ namespace Scada.Comm.KP.AeroQuad
     /// </summary>
     public partial class FrmControl : Form
     {
-        private string cmdDir;
+        private string cmdDir; // директория команд
 
         /// <summary>
         /// Конструктор, ограничивающий создание формы без параметров
