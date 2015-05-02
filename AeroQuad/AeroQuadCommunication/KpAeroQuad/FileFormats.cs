@@ -6,16 +6,55 @@ using System.Text;
 
 namespace Scada.Comm.KP
 {
+    /// <summary>
+    /// Форматы файлов, используемые в исследованиях
+    /// </summary>
     public static class FileFormats
     {
-        public interface IConvertibleToCvs
+        /// <summary>
+        /// Интерфейс файлов, состоящих из записей
+        /// </summary>
+        public interface IFileOfRecords
         {
-            //static string ConvertHeaderToCsv();
-            string ConvertRecordToCvs();
+            object CreateRecord(byte[] buffer);
         }
 
+        /// <summary>
+        /// Интерфейс для поддержки преобразования файла в формат CSV
+        /// </summary>
+        public interface IConvertibleToCvs
+        {
+            string GetCsvHeader();
+            string ConvertRecordToCvs(object record);
+        }
+
+        /// <summary>
+        /// Формат файлов телеметрии, состоящих из записей типа F01Record
+        /// </summary>
+        public class F01FileFormat : IFileOfRecords, IConvertibleToCvs
+        {
+            public object CreateRecord(byte[] buffer)
+            {
+                return F01Record.FromBytes(buffer);
+            }
+
+            public string GetCsvHeader()
+            {
+                return "Time;RollGyroRate;PitchGyroRate;YawGyroRate;AccelXAxis;AccelYAxis;AccelZAxis;MagRawValueXAxis;MagRawValueYAxis;MagRawValueZAxis";
+            }
+
+            public string ConvertRecordToCvs(object record)
+            {
+                F01Record rec = (F01Record)record;
+                return rec.ConvertRecordToCvs();
+            }
+        }
+
+        /// <summary>
+        /// Запись телеметрии
+        /// </summary>
         [StructLayout(LayoutKind.Explicit, Pack = 1, Size = 80)]
-        public struct F01Record : IConvertibleToCvs
+        public struct F01Record
         {
             public const int RecSize = 80;
 
@@ -99,18 +138,24 @@ namespace Scada.Comm.KP
 
             public static F01Record FromBytes(byte[] buffer)
             {
-                return new F01Record();
+                F01Record rec = new F01Record();
+                rec.Time = BitConverter.ToInt64(buffer, 0);
+                rec.RollGyroRate = BitConverter.ToDouble(buffer, 8);
+                rec.PitchGyroRate = BitConverter.ToDouble(buffer, 16);
+                rec.YawGyroRate = BitConverter.ToDouble(buffer, 24);
+                rec.AccelXAxis = BitConverter.ToDouble(buffer, 32);
+                rec.AccelYAxis = BitConverter.ToDouble(buffer, 40);
+                rec.AccelZAxis = BitConverter.ToDouble(buffer, 48);
+                rec.MagRawValueXAxis = BitConverter.ToDouble(buffer, 56);
+                rec.MagRawValueYAxis = BitConverter.ToDouble(buffer, 64);
+                rec.MagRawValueZAxis = BitConverter.ToDouble(buffer, 72);
+                return rec;
             }
-
-            //public static string ConvertHeaderToCsv()
-            //{
-            //    return "Time;RollGyroRate;PitchGyroRate;YawGyroRate;AccelXAxis;AccelYAxis;AccelZAxis;MagRawValueXAxis;MagRawValueYAxis;MagRawValueZAxis";
-            //}
 
             public string ConvertRecordToCvs()
             {
                 return new StringBuilder()
-                    .Append(DateTime.FromBinary(Time).ToLongTimeString()).Append(";")
+                    .Append(DateTime.FromBinary(Time).ToString("HH:mm:ss:fff")).Append(";")
                     .Append(RollGyroRate).Append(";")
                     .Append(PitchGyroRate).Append(";")
                     .Append(YawGyroRate).Append(";")
@@ -125,22 +170,57 @@ namespace Scada.Comm.KP
         }
 
 
-        public static void ConvertF0ToCsv(string srcFileName, string destFileName)
+        /// <summary>
+        /// Выбрать формат файла в зависимости от расширения
+        /// </summary>
+        private static object ChooseFileFormat(string srcFileName)
         {
+            string ext = Path.GetExtension(srcFileName).ToLower();
+            if (ext == ".f01")
+                return new F01FileFormat();
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// Преобразовать файл в формат CSV
+        /// </summary>
+        public static void ConvertFileToCsv(string srcFileName, string destFileName)
+        {
+            // проверка аргументов метода
+            if (srcFileName == null)
+                throw new ArgumentNullException("srcFileNamve");
+            if (destFileName == null)
+                throw new ArgumentNullException("destFileName");
+
+            // определение и проверка формата файла
+            object fileFormat = ChooseFileFormat(srcFileName);
+            if (fileFormat == null)
+                throw new Exception("Неизвестный формат файла.");
+
+            IFileOfRecords iftFileOfRecords = fileFormat as IFileOfRecords;
+            if (iftFileOfRecords == null)
+                throw new Exception("Файл должен состоять из записей.");
+
+            IConvertibleToCvs itfConvertibleToCvs = fileFormat as IConvertibleToCvs;
+            if (itfConvertibleToCvs == null)
+                throw new NotSupportedException("Формат файла не поддерживает преобразование в CSV.");
+
+            // преобразование
             using (FileStream inStream = File.OpenRead(srcFileName))
             {
                 using (StreamWriter outWriter = File.CreateText(destFileName))
                 {
                     // вывод заголовка
-                    //outWriter.WriteLine(F01Record.ConvertHeaderToCsv());
+                    outWriter.WriteLine(itfConvertibleToCvs.GetCsvHeader());
 
                     // вывод записей
                     byte[] buf = new byte[F01Record.RecSize];
                     while (inStream.Position < inStream.Length)
                     {
                         inStream.Read(buf, 0, F01Record.RecSize);
-                        F01Record rec = F01Record.FromBytes(buf);
-                        outWriter.WriteLine(rec.ConvertRecordToCvs());
+                        object rec = iftFileOfRecords.CreateRecord(buf);
+                        outWriter.WriteLine(itfConvertibleToCvs.ConvertRecordToCvs(rec));
                     }
                 }
             }

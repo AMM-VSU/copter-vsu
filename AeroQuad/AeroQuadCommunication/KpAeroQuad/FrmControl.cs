@@ -10,29 +10,58 @@ using System.Windows.Forms;
 
 namespace Scada.Comm.KP.AeroQuad
 {
+    /// <summary>
+    /// Форма управления и сервиса
+    /// </summary>
     public partial class FrmControl : Form
     {
-        public FrmControl()
+        private string cmdDir;
+
+        /// <summary>
+        /// Конструктор, ограничивающий создание формы без параметров
+        /// </summary>
+        private FrmControl()
         {
             InitializeComponent();
         }
 
-        private void btnSend_i_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Отобразить форму модально
+        /// </summary>
+        public static void ShowDialog(string cmdDir)
         {
-
+            FrmControl frmControl = new FrmControl();
+            frmControl.cmdDir = cmdDir;
+            frmControl.ShowDialog();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnSend_i_Click(object sender, EventArgs e)
         {
+            KPLogic.Command cmd = new KPLogic.Command(KPLogic.CmdType.Binary);
+            cmd.CmdNum = 1;
+            cmd.CmdData = new byte[] { 0x69 }; // символ i
+            string msg;
 
+            if (KPUtils.SaveCmd(cmdDir, "KpAeroQuad", cmd, out msg))
+                ScadaUtils.ShowInfo(msg);
+            else
+                ScadaUtils.ShowError(msg);
         }
 
         private void btnConvertToCsv_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                FileFormats.ConvertF0ToCsv(openFileDialog.FileName, 
-                    Path.ChangeExtension(openFileDialog.FileName, "csv"));
+                try
+                {
+                    FileFormats.ConvertFileToCsv(openFileDialog.FileName,
+                        Path.ChangeExtension(openFileDialog.FileName, "csv"));
+                    ScadaUtils.ShowInfo("Конвертирование выполнено успешно.");
+                }
+                catch (Exception ex)
+                {
+                    ScadaUtils.ShowError(ex.Message);
+                }
             }
         }
     }

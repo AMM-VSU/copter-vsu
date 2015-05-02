@@ -25,7 +25,7 @@ namespace Scada.Comm.KP
 
         public override void ShowProps()
         {
-            (new FrmControl()).ShowDialog();
+            FrmControl.ShowDialog(CmdDir);
         }
     }
 }

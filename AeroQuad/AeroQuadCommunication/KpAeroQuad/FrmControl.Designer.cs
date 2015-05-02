@@ -49,7 +49,7 @@
             this.btnConvertToCsv.Name = "btnConvertToCsv";
             this.btnConvertToCsv.Size = new System.Drawing.Size(260, 23);
             this.btnConvertToCsv.TabIndex = 1;
-            this.btnConvertToCsv.Text = "Конвертировать в csv";
+            this.btnConvertToCsv.Text = "Конвертировать в CSV";
             this.btnConvertToCsv.UseVisualStyleBackColor = true;
             this.btnConvertToCsv.Click += new System.EventHandler(this.btnConvertToCsv_Click);
             // 
