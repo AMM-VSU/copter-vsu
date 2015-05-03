@@ -40,7 +40,8 @@ namespace Scada.Comm.KP
 
             public string GetCsvHeader()
             {
-                return "Time;RollGyroRate;PitchGyroRate;YawGyroRate;AccelXAxis;AccelYAxis;AccelZAxis;MagRawValueXAxis;MagRawValueYAxis;MagRawValueZAxis";
+                return "Time;SecondOfDay;RollGyroRate;PitchGyroRate;YawGyroRate;AccelXAxis;AccelYAxis;AccelZAxis;" + 
+                    "MagRawValueXAxis;MagRawValueYAxis;MagRawValueZAxis";
             }
 
             public string ConvertRecordToCvs(object record)
@@ -154,8 +155,10 @@ namespace Scada.Comm.KP
 
             public string ConvertRecordToCvs()
             {
+                DateTime dt = DateTime.FromBinary(Time);
                 return new StringBuilder()
-                    .Append(DateTime.FromBinary(Time).ToString("HH:mm:ss:fff")).Append(";")
+                    .Append(dt.ToString("HH:mm:ss.fff")).Append(";")
+                    .Append(dt.TimeOfDay.TotalSeconds).Append(";")
                     .Append(RollGyroRate).Append(";")
                     .Append(PitchGyroRate).Append(";")
                     .Append(YawGyroRate).Append(";")
