@@ -161,7 +161,7 @@ namespace Scada.Comm.KP
             {
                 if (telemetryStream == null)
                 {
-                    string dir = LogDir + "AeroQuad\\";
+                    string dir = LogDir + "AeroQuad" + Path.DirectorySeparatorChar;
                     Directory.CreateDirectory(dir);
                     string path = dir + "telemetry_" + DateTime.Now.ToString("yyyy'-'MM'-'dd'_'HH'-'mm'-'ss") + ".f01";
                     telemetryStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read);
