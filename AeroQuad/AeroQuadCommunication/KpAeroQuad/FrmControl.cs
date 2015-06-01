@@ -15,7 +15,9 @@ namespace Scada.Comm.KP.AeroQuad
     /// </summary>
     public partial class FrmControl : Form
     {
+        private int kpNum;     // номер КП
         private string cmdDir; // директория команд
+
 
         /// <summary>
         /// Конструктор, ограничивающий создание формы без параметров
@@ -25,19 +27,28 @@ namespace Scada.Comm.KP.AeroQuad
             InitializeComponent();
         }
 
+
         /// <summary>
         /// Отобразить форму модально
         /// </summary>
-        public static void ShowDialog(string cmdDir)
+        public static void ShowDialog(int kpNum, string cmdDir)
         {
             FrmControl frmControl = new FrmControl();
+            frmControl.kpNum = kpNum;
             frmControl.cmdDir = cmdDir;
             frmControl.ShowDialog();
+        }
+
+
+        private void FrmControl_Load(object sender, EventArgs e)
+        {
+            btnSend_i.Enabled = kpNum > 0;
         }
 
         private void btnSend_i_Click(object sender, EventArgs e)
         {
             KPLogic.Command cmd = new KPLogic.Command(KPLogic.CmdType.Binary);
+            cmd.KPNum = kpNum;
             cmd.CmdNum = 1;
             cmd.CmdData = new byte[] { 0x69 }; // символ i
             string msg;

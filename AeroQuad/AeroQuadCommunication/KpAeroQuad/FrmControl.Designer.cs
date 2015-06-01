@@ -53,10 +53,6 @@
             this.btnConvertToCsv.UseVisualStyleBackColor = true;
             this.btnConvertToCsv.Click += new System.EventHandler(this.btnConvertToCsv_Click);
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
-            // 
             // FrmControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -71,6 +67,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Управление AeroQuad";
+            this.Load += new System.EventHandler(this.FrmControl_Load);
             this.ResumeLayout(false);
 
         }
