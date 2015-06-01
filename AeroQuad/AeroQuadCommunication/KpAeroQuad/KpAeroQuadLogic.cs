@@ -9,17 +9,26 @@ namespace Scada.Comm.KP
 {
     public class KpAeroQuadLogic : KPLogic
     {
+        // Номера сигналов тегов
+        private const int CONNECT_SIGNAL = 1;
+        private const int RECORD_SIGNAL = 2;
+        private const int RECEIVED_MSG_SIGNAL = 3;
+        private const int FAILED_MSG_SIGNAL = 4;
+        private const int MSG_PER_SEC_SIGNAL = 5;
+        private const int TELEMETRY_START_SIGNAL = 6;
+
         // Разделитель данных в ответе контроллера
         private static readonly char[] Separator = { ',' }; 
         // Формат получаемых чисел
         private static readonly NumberFormatInfo NumFormat = CultureInfo.GetCultureInfo("en-GB").NumberFormat;
 
-        private const int InBufSize = 100; // размер буфера входных данных
-        private byte[] inBuf;              // буфер входных данных
-        private int inBufLen;              // используемая длина буфера входных данных
-        private int startSec;              // стартовая секунда для расчёта количества сообщений
-        private int msgPerSec;             // счётчик количества сообщений в секунду
-        private FileStream stream;         // файловый поток
+        private const int InBufSize = 100;  // размер буфера входных данных
+        private byte[] inBuf;               // буфер входных данных
+        private int inBufLen;               // используемая длина буфера входных данных
+        private int startSec;               // стартовая секунда для расчёта количества сообщений
+        private int msgPerSec;              // счётчик количества сообщений в секунду
+        private FileStream telemetryStream; // поток для записи телеметрии
+        private bool recordOn;              // запись данных телеметрии включена
 
 
         public KpAeroQuadLogic(int number)
@@ -30,23 +39,25 @@ namespace Scada.Comm.KP
             inBufLen = 0;
             startSec = DateTime.Now.Second;
             msgPerSec = 0;
-            stream = null;
+            telemetryStream = null;
+            recordOn = false;
 
             // инициализация тегов КП
-            InitArrays(13, 0);
+            InitArrays(14, 0);
             KPParams[0] = new Param(1, "Связь");
-            KPParams[1] = new Param(2, "Принятых сообщений");
-            KPParams[2] = new Param(3, "Повреждённых сообщений");
-            KPParams[3] = new Param(4, "Сообщений в секунду");
-            KPParams[4] = new Param(5, "Roll Gyro Rate");
-            KPParams[5] = new Param(6, "Pitch Gyro Rate");
-            KPParams[6] = new Param(7, "Yaw Gyro Rate");
-            KPParams[7] = new Param(8, "Accel X Axis");
-            KPParams[8] = new Param(9, "Accel Y Axis");
-            KPParams[9] = new Param(10, "Accel Z Axis");
-            KPParams[10] = new Param(11, "Mag Raw Value X Axis");
-            KPParams[11] = new Param(12, "Mag Raw Value Y Axis");
-            KPParams[12] = new Param(13, "Mag Raw Value Z Axis");
+            KPParams[1] = new Param(2, "Запись");
+            KPParams[2] = new Param(3, "Принятых сообщений");
+            KPParams[3] = new Param(4, "Повреждённых сообщений");
+            KPParams[4] = new Param(5, "Сообщений в секунду");
+            KPParams[5] = new Param(6, "Roll Gyro Rate");
+            KPParams[6] = new Param(7, "Pitch Gyro Rate");
+            KPParams[7] = new Param(8, "Yaw Gyro Rate");
+            KPParams[8] = new Param(9, "Accel X Axis");
+            KPParams[9] = new Param(10, "Accel Y Axis");
+            KPParams[10] = new Param(11, "Accel Z Axis");
+            KPParams[11] = new Param(12, "Mag Raw Value X Axis");
+            KPParams[12] = new Param(13, "Mag Raw Value Y Axis");
+            KPParams[13] = new Param(14, "Mag Raw Value Z Axis");
 
             // установка признака возможности отправки команд
             CanSendCmd = true;
@@ -62,7 +73,7 @@ namespace Scada.Comm.KP
 
             try
             {
-                int paramIndex = 4; // индекс устанавливаемого тега
+                int paramIndex = TELEMETRY_START_SIGNAL - 1; // индекс устанавливаемого тега
 
                 if (inBufLen > 0)
                 {
@@ -91,32 +102,42 @@ namespace Scada.Comm.KP
                             }
                         }
 
-                        // определение успешности обработки данных
-                        decodeOK = paramIndex == KPParams.Length;
+                        if (recordOn)
+                        {
+                            // определение успешности обработки данных
+                            decodeOK = paramIndex == KPParams.Length;
 
-                        if (decodeOK)
-                        {
-                            SetParamData(1, CurData[1].Val + 1, 1); // увеличение счётчика принятых сообщений
-                            msgPerSec++;     // увеличение счётчика сообщений в секунду
-                            SaveRecord(rec); // запись в файл
-                        }
-                        else
-                        {
-                            SetParamData(2, CurData[2].Val + 1, 1); // увеличение счётчика повреждённых сообщений
+                            if (decodeOK)
+                            {
+                                // увеличение счётчика принятых сообщений
+                                IncCounter(RECEIVED_MSG_SIGNAL);
+                                // увеличение счётчика сообщений в секунду
+                                msgPerSec++;
+                                // запись телеметрии в файл
+                                SaveRecord(rec); 
+                            }
+                            else
+                            {
+                                // увеличение счётчика повреждённых сообщений
+                                IncCounter(FAILED_MSG_SIGNAL);
+                            }
                         }
                     }
                 }
 
                 // установка тега наличия связи
-                SetParamData(0, decodeOK ? 1.0 : 0.0, 1);
+                SetParamData(CONNECT_SIGNAL - 1, decodeOK ? 1.0 : 0.0, 1);
 
                 // установка тега количества сообщений в секунду
-                int curSec = DateTime.Now.Second;
-                if (startSec != curSec)
+                if (recordOn)
                 {
-                    SetParamData(3, msgPerSec, 1);
-                    startSec = curSec;
-                    msgPerSec = 0;
+                    int curSec = DateTime.Now.Second;
+                    if (startSec != curSec)
+                    {
+                        SetParamData(MSG_PER_SEC_SIGNAL - 1, msgPerSec, 1);
+                        startSec = curSec;
+                        msgPerSec = 0;
+                    }
                 }
 
                 // установка недостоверности для непринятых тегов
@@ -138,21 +159,71 @@ namespace Scada.Comm.KP
         {
             try
             {
-                if (stream == null)
+                if (telemetryStream == null)
                 {
                     string dir = LogDir + "AeroQuad\\";
                     Directory.CreateDirectory(dir);
                     string path = dir + "telemetry_" + DateTime.Now.ToString("yyyy'-'MM'-'dd'_'HH'-'mm'-'ss") + ".f01";
-                    stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read);
+                    telemetryStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read);
                 }
 
                 byte[] bytes = rec.GetBytes();
-                stream.Write(bytes, 0, bytes.Length);
-                stream.Flush(true);
+                telemetryStream.Write(bytes, 0, bytes.Length);
+                telemetryStream.Flush(true);
             }
             catch (Exception ex)
             {
                 WriteToLog("Ошибка при записи в файл: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Включить запись телеметрии
+        /// </summary>
+        private void SetRecordOn()
+        {
+            SetParamData(RECORD_SIGNAL - 1, 1.0, 1);
+            SetParamData(RECEIVED_MSG_SIGNAL - 1, 0.0, 1);
+            SetParamData(FAILED_MSG_SIGNAL - 1, 0.0, 1);
+            SetParamData(MSG_PER_SEC_SIGNAL - 1, 0.0, 1);
+
+            recordOn = true;
+            startSec = DateTime.Now.Second;
+            msgPerSec = 0;
+        }
+
+        /// <summary>
+        /// Отключить запись телеметрии
+        /// </summary>
+        private void SetRecordOff()
+        {
+            SetParamData(RECORD_SIGNAL - 1, 0.0, 1);
+            SetParamData(RECEIVED_MSG_SIGNAL - 1, 0.0, 0);
+            SetParamData(FAILED_MSG_SIGNAL - 1, 0.0, 0);
+            SetParamData(MSG_PER_SEC_SIGNAL - 1, 0.0, 0);
+
+            recordOn = false;
+            CloseTelemetryStream();
+        }
+
+        /// <summary>
+        /// Увеличить значение тега счётчика
+        /// </summary>
+        private void IncCounter(int signal)
+        {
+            int paramIndex = signal - 1;
+            SetParamData(paramIndex, CurData[paramIndex].Val + 1, 1);
+        }
+
+        /// <summary>
+        /// Закрыть поток для записи телеметрии
+        /// </summary>
+        private void CloseTelemetryStream()
+        {
+            if (telemetryStream != null)
+            {
+                telemetryStream.Close();
+                telemetryStream = null;
             }
         }
 
@@ -241,16 +312,12 @@ namespace Scada.Comm.KP
 
         public override void OnCommLineStart()
         {
-            // инициализация тегов счётчиков
-            SetParamData(1, 0.0, 1);
-            SetParamData(2, 0.0, 1);
-            SetParamData(3, 0.0, 1);
+            SetRecordOff();
         }
 
         public override void OnCommLineTerminate()
         {
-             if (stream != null)
-                stream.Close();
+            CloseTelemetryStream();
         }
 
         public override void Session()
@@ -280,6 +347,7 @@ namespace Scada.Comm.KP
 
             if (cmd.CmdNum == 1 && cmd.CmdType == CmdType.Binary)
             {
+                // команда отправки данных контроллеру
                 if (cmd.CmdData != null && cmd.CmdData.Length > 0)
                 {
                     // отправка данных команды
@@ -295,6 +363,21 @@ namespace Scada.Comm.KP
                     WriteToLog(KPUtils.NoCommandData);
                 }
             }
+            else if (cmd.CmdNum == 2 && cmd.CmdType == CmdType.Standard)
+            {
+                // команда включения или отключения записи
+                if (cmd.CmdVal > 0)
+                {
+                    WriteToLog("Запись телеметрии включена");
+                    SetRecordOn();
+                }
+                else
+                {
+                    WriteToLog("Запись телеметрии отключена");
+                    SetRecordOff();
+                }
+                lastCommSucc = true;
+            }
             else
             {
                 WriteToLog(KPUtils.IllegalCommand);
@@ -308,9 +391,11 @@ namespace Scada.Comm.KP
         {
             if (paramData.Stat > 0)
             {
-                if (signal == 1)
+                if (signal == CONNECT_SIGNAL)
                     return paramData.Val > 0 ? "Есть" : "Нет";
-                else if (signal <= 2 && signal <= 4)
+                else if (signal == RECORD_SIGNAL)
+                    return paramData.Val > 0 ? "Вкл" : "Откл";
+                else if (signal <= FAILED_MSG_SIGNAL && signal < TELEMETRY_START_SIGNAL)
                     return paramData.Val.ToString("N0");
             }
 
