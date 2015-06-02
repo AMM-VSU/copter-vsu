@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScadaCommSvcConfig>
+  <!--Common Parameters-->
+  <CommonParams>
+    <Param name="ServerUse" value="true" descr="Use SCADA-Server" />
+    <Param name="ServerHost" value="localhost" descr="SCADA-Server host or IP address" />
+    <Param name="ServerPort" value="10000" descr="SCADA-Server TCP port number" />
+    <Param name="ServerUser" value="ScadaComm" descr="User name for the connection to SCADA-Server" />
+    <Param name="ServerPwd" value="12345" descr="User password for the connection to SCADA-Server" />
+    <Param name="ServerTimeout" value="10000" descr="SCADA-Server response timeout, ms" />
+    <Param name="WaitForStop" value="10000" descr="Waiting for the communication lines temrination, ms" />
+    <Param name="RefrParams" value="60" descr="Sending all device data period, sec" />
+  </CommonParams>
+  <!--Communication Lines-->
+  <CommLines>
+    <!--Line 11-->
+    <CommLine active="true" bind="true" number="11" name="APC220">
+      <Connection>
+        <ConnType value="ComPort" descr="Connection type: ComPort or None" />
+        <ComPortSettings portName="/dev/ttyUSB0" baudRate="9600" dataBits="8" parity="None" stopBits="One" dtrEnable="false" rtsEnable="false" />
+      </Connection>
+      <LineParams>
+        <Param name="ReqTriesCnt" value="3" descr="Device request retries count on error" />
+        <Param name="CycleDelay" value="0" descr="Delay after request cycle, ms" />
+        <Param name="MaxCommErrCnt" value="1" descr="Failed session count for setting device error state" />
+        <Param name="CmdEnabled" value="true" descr="Commands enabled" />
+      </LineParams>
+      <UserParams />
+      <ReqSequence>
+        <KP active="true" bind="true" number="101" name="AQ" dll="KpAeroQuad" address="0" callNum="" timeout="1000" delay="0" time="00:00:00" period="00:00:00" cmdLine="" />
+      </ReqSequence>
+    </CommLine>
+  </CommLines>
+</ScadaCommSvcConfig>
