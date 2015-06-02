@@ -42,6 +42,8 @@ namespace Scada.Comm.KP.AeroQuad
 
         private void FrmControl_Load(object sender, EventArgs e)
         {
+            if (kpNum > 0)
+                Text += ". Device: " + kpNum;
             btnSend_i.Enabled = kpNum > 0;
         }
 
@@ -59,6 +61,20 @@ namespace Scada.Comm.KP.AeroQuad
                 ScadaUtils.ShowError(msg);
         }
 
+        private void btnRecordOnOff_Click(object sender, EventArgs e)
+        {
+            KPLogic.Command cmd = new KPLogic.Command(KPLogic.CmdType.Standard);
+            cmd.KPNum = kpNum;
+            cmd.CmdNum = 2;
+            cmd.CmdVal = sender == btnRecordOn ? 1.0 : 0.0;
+            string msg;
+
+            if (KPUtils.SaveCmd(cmdDir, "KpAeroQuad", cmd, out msg))
+                ScadaUtils.ShowInfo(msg);
+            else
+                ScadaUtils.ShowError(msg);
+        }
+
         private void btnConvertToCsv_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -67,7 +83,7 @@ namespace Scada.Comm.KP.AeroQuad
                 {
                     FileFormats.ConvertFileToCsv(openFileDialog.FileName,
                         Path.ChangeExtension(openFileDialog.FileName, "csv"));
-                    ScadaUtils.ShowInfo("Конвертирование выполнено успешно.");
+                    ScadaUtils.ShowInfo("Conversion completed successfully.");
                 }
                 catch (Exception ex)
                 {

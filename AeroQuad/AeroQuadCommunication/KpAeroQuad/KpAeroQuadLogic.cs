@@ -44,11 +44,11 @@ namespace Scada.Comm.KP
 
             // инициализация тегов КП
             InitArrays(14, 0);
-            KPParams[0] = new Param(1, "Связь");
-            KPParams[1] = new Param(2, "Запись");
-            KPParams[2] = new Param(3, "Принятых сообщений");
-            KPParams[3] = new Param(4, "Повреждённых сообщений");
-            KPParams[4] = new Param(5, "Сообщений в секунду");
+            KPParams[0] = new Param(1, "Connection");
+            KPParams[1] = new Param(2, "Record");
+            KPParams[2] = new Param(3, "Received messages");
+            KPParams[3] = new Param(4, "Failed messages");
+            KPParams[4] = new Param(5, "Messages per second");
             KPParams[5] = new Param(6, "Roll Gyro Rate");
             KPParams[6] = new Param(7, "Pitch Gyro Rate");
             KPParams[7] = new Param(8, "Yaw Gyro Rate");
@@ -98,7 +98,7 @@ namespace Scada.Comm.KP
                             catch (FormatException ex)
                             {
                                 throw new FormatException(
-                                    "Невозможно преобразовать строку \"" + parts[i] + "\" в число.", ex);
+                                    "Unable to convert string \"" + parts[i] + "\" to number.", ex);
                             }
                         }
 
@@ -146,7 +146,7 @@ namespace Scada.Comm.KP
             }
             catch (Exception ex)
             {
-                WriteToLog("Ошибка при обработке данных: " + ex.Message);
+                WriteToLog("Error decoding response: " + ex.Message);
             }
 
             return decodeOK;
@@ -173,7 +173,7 @@ namespace Scada.Comm.KP
             }
             catch (Exception ex)
             {
-                WriteToLog("Ошибка при записи в файл: " + ex.Message);
+                WriteToLog("Error saving record to file: " + ex.Message);
             }
         }
 
@@ -305,7 +305,7 @@ namespace Scada.Comm.KP
             }
             catch (Exception ex)
             {
-                logText = "Ошибка при отправке данных: " + ex.Message;
+                logText = "Error sending data: " + ex.Message;
             }
         }
 
@@ -368,12 +368,12 @@ namespace Scada.Comm.KP
                 // команда включения или отключения записи
                 if (cmd.CmdVal > 0)
                 {
-                    WriteToLog("Запись телеметрии включена");
+                    WriteToLog("Telemetry recording is turned ON");
                     SetRecordOn();
                 }
                 else
                 {
-                    WriteToLog("Запись телеметрии отключена");
+                    WriteToLog("Telemetry recording is turned OFF");
                     SetRecordOff();
                 }
                 lastCommSucc = true;
@@ -392,9 +392,9 @@ namespace Scada.Comm.KP
             if (paramData.Stat > 0)
             {
                 if (signal == CONNECT_SIGNAL)
-                    return paramData.Val > 0 ? "Есть" : "Нет";
+                    return paramData.Val > 0 ? "Yes" : "No";
                 else if (signal == RECORD_SIGNAL)
-                    return paramData.Val > 0 ? "Вкл" : "Откл";
+                    return paramData.Val > 0 ? "On" : "Off";
                 else if (signal <= FAILED_MSG_SIGNAL && signal < TELEMETRY_START_SIGNAL)
                     return paramData.Val.ToString("N0");
             }

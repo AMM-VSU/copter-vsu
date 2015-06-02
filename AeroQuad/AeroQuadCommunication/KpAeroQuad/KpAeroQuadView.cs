@@ -19,10 +19,10 @@ namespace Scada.Comm.KP
         {
             get
             {
-                return "Взаимодействие с полётным контроллером AeroQuad.\n\n" +
-                    "Команды ТУ:\n" +
-                    "1 (бинарная) - передача данных контроллеру,\n" +
-                    "2 (стандартная) - включение или отключение записи телеметрии.";
+                return "Interacting with AeroQuad filght controllers.\n\n" +
+                    "Commands:\n" +
+                    "1 (Binary) - send data to controller,\n" +
+                    "2 (Standard) - turn telemetry recording on or off.";
             }
         }
 

@@ -199,15 +199,15 @@ namespace Scada.Comm.KP
             // определение и проверка формата файла
             object fileFormat = ChooseFileFormat(srcFileName);
             if (fileFormat == null)
-                throw new Exception("Неизвестный формат файла.");
+                throw new Exception("Unknown file format.");
 
             IFileOfRecords iftFileOfRecords = fileFormat as IFileOfRecords;
             if (iftFileOfRecords == null)
-                throw new Exception("Файл должен состоять из записей.");
+                throw new Exception("File must consist of records.");
 
             IConvertibleToCvs itfConvertibleToCvs = fileFormat as IConvertibleToCvs;
             if (itfConvertibleToCvs == null)
-                throw new NotSupportedException("Формат файла не поддерживает преобразование в CSV.");
+                throw new NotSupportedException("File format doesn't support converting to CSV.");
 
             // преобразование
             using (FileStream inStream = File.OpenRead(srcFileName))
