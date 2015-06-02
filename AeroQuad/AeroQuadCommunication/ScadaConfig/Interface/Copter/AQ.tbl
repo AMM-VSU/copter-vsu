@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="windows-1251"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <TableView title="AeroQuad">
   <Param cnlNum="1001">Connection</Param>
   <Param cnlNum="1002">Record</Param>
   <Param cnlNum="1003">Received messages</Param>
   <Param cnlNum="1004">Failed messages</Param>
   <Param cnlNum="1005">Messages per second</Param>
+  <Param />
   <Param cnlNum="1006">Roll Gyro Rate</Param>
   <Param cnlNum="1007">Pitch Gyro Rate</Param>
   <Param cnlNum="1008">Yaw Gyro Rate</Param>
