@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModAutoControl>
+  <Triggers>
+    <Trigger name="Request telemetry" type="CmdTrigger">
+      <CmdTriggerProps>
+        <CtrlCnlNum>1003</CtrlCnlNum>
+        <CmdTypeID>0</CmdTypeID>
+        <ChkCmdVal>false</ChkCmdVal>
+        <CmdVal>0</CmdVal>
+        <CmdDataStr />
+        <PassCmd>false</PassCmd>
+      </CmdTriggerProps>
+      <Commands>
+        <Command cmdTypeID="1">
+          <KPNum>101</KPNum>
+          <CmdNum>1</CmdNum>
+          <CmdData>69</CmdData>
+          <EditMode>Str</EditMode>
+          <CopyCmdVal>false</CopyCmdVal>
+        </Command>
+      </Commands>
+    </Trigger>
+  </Triggers>
+</ModAutoControl>

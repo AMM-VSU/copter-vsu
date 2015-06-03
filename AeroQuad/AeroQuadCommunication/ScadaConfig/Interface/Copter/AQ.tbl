@@ -1,5 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="windows-1251"?>
 <TableView title="AeroQuad">
+  <Param ctrlCnlNum="1003">Request telemetry</Param>
   <Param cnlNum="1001">Connection</Param>
   <Param cnlNum="1002">Record</Param>
   <Param cnlNum="1003">Received messages</Param>
