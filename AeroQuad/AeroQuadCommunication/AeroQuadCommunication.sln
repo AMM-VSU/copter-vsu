@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KpAeroQuad", "KpAeroQuad\KpAeroQuad.csproj", "{49C5BC5F-C76C-4454-91D5-249ADCF2A7B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlgAeroQuad", "PlgAeroQuad\PlgAeroQuad.csproj", "{88B62CA1-0A32-43BA-BBD9-9AE633649573}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{49C5BC5F-C76C-4454-91D5-249ADCF2A7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49C5BC5F-C76C-4454-91D5-249ADCF2A7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49C5BC5F-C76C-4454-91D5-249ADCF2A7B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B62CA1-0A32-43BA-BBD9-9AE633649573}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B62CA1-0A32-43BA-BBD9-9AE633649573}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B62CA1-0A32-43BA-BBD9-9AE633649573}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B62CA1-0A32-43BA-BBD9-9AE633649573}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
