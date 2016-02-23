@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using Scada.UI;
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Scada.Comm.KP.AeroQuad
@@ -56,9 +51,9 @@ namespace Scada.Comm.KP.AeroQuad
             string msg;
 
             if (KPUtils.SaveCmd(cmdDir, "KpAeroQuad", cmd, out msg))
-                ScadaUtils.ShowInfo(msg);
+                ScadaUiUtils.ShowInfo(msg);
             else
-                ScadaUtils.ShowError(msg);
+                ScadaUiUtils.ShowError(msg);
         }
 
         private void btnRecordOnOff_Click(object sender, EventArgs e)
@@ -70,9 +65,9 @@ namespace Scada.Comm.KP.AeroQuad
             string msg;
 
             if (KPUtils.SaveCmd(cmdDir, "KpAeroQuad", cmd, out msg))
-                ScadaUtils.ShowInfo(msg);
+                ScadaUiUtils.ShowInfo(msg);
             else
-                ScadaUtils.ShowError(msg);
+                ScadaUiUtils.ShowError(msg);
         }
 
         private void btnConvertToCsv_Click(object sender, EventArgs e)
@@ -83,11 +78,11 @@ namespace Scada.Comm.KP.AeroQuad
                 {
                     FileFormats.ConvertFileToCsv(openFileDialog.FileName,
                         Path.ChangeExtension(openFileDialog.FileName, "csv"));
-                    ScadaUtils.ShowInfo("Conversion completed successfully.");
+                    ScadaUiUtils.ShowInfo("Conversion completed successfully.");
                 }
                 catch (Exception ex)
                 {
-                    ScadaUtils.ShowError(ex.Message);
+                    ScadaUiUtils.ShowError(ex.Message);
                 }
             }
         }

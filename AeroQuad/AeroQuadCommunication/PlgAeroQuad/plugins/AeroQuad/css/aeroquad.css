@@ -1,0 +1,27 @@
+﻿body
+{
+    padding-top: 70px;
+    padding-bottom: 30px;
+}
+
+.container .btn
+{
+    margin-right: 5px;
+    min-width: 120px;
+}
+
+div.tag
+{
+    margin-top: 10px;
+}
+
+div.tag span
+{
+    min-width: 180px;
+    display: inline-block;
+}
+
+div.tag input
+{
+    width: 190px;
+}

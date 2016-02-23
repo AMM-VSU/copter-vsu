@@ -58,7 +58,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="plugins\AeroQuad\css\bootstrap-theme.min.css" />
+    <Content Include="plugins\AeroQuad\css\bootstrap.min.css" />
     <Content Include="plugins\AeroQuad\Default.aspx" />
+    <Content Include="plugins\AeroQuad\js\bootstrap.min.js" />
+    <Content Include="plugins\AeroQuad\js\jquery-2.2.0.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -79,9 +83,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="plugins\AeroQuad\css\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
