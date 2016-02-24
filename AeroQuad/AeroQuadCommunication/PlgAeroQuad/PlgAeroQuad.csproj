@@ -20,6 +20,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,44 +40,54 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Log">
+      <HintPath>..\..\..\..\..\SCADA\ScadaWeb\bin\Log.dll</HintPath>
+    </Reference>
+    <Reference Include="ScadaData, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\SCADA\ScadaWeb\bin\ScadaData.dll</HintPath>
+    </Reference>
+    <Reference Include="ScadaWebCommon">
+      <HintPath>..\..\..\..\..\SCADA\ScadaWeb\bin\ScadaWebCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config\CommSettings.xml" />
+    <Content Include="plugins\AeroQuad\AeroQuadSvc.svc" />
     <Content Include="plugins\AeroQuad\css\aeroquad.css" />
     <Content Include="plugins\AeroQuad\css\bootstrap-theme.min.css" />
     <Content Include="plugins\AeroQuad\css\bootstrap.min.css" />
-    <Content Include="plugins\AeroQuad\Default.aspx" />
+    <Content Include="plugins\AeroQuad\Telemetry.aspx" />
+    <Content Include="plugins\AeroQuad\js\aeroquad.js" />
     <Content Include="plugins\AeroQuad\js\bootstrap.min.js" />
     <Content Include="plugins\AeroQuad\js\jquery-2.2.0.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="plugins\AeroQuad\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="plugins\AeroQuad\AeroQuadSvc.svc.cs">
+      <DependentUpon>AeroQuadSvc.svc</DependentUpon>
+    </Compile>
+    <Compile Include="plugins\AeroQuad\Telemetry.aspx.cs">
+      <DependentUpon>Telemetry.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="plugins\AeroQuad\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="plugins\AeroQuad\Telemetry.aspx.designer.cs">
+      <DependentUpon>Telemetry.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="plugins\AeroQuad\Web.config" />
+    <Content Include="plugins\AeroQuad\css\bootstrap-theme.min.css.map" />
+    <Content Include="plugins\AeroQuad\css\bootstrap.min.css.map" />
+    <None Include="Properties\PublishProfiles\MainProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

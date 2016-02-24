@@ -25,3 +25,9 @@ div.tag input
 {
     width: 190px;
 }
+
+#divStatus
+{
+    font-size: 12px;
+    margin: 10px 0px 0px 180px;
+}

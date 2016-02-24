@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Scada.Web.plugins.AeroQuad.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Telemetry.aspx.cs" Inherits="Scada.Web.Plugins.AeroQuad.WFrmTelemetry" %>
 
 <!DOCTYPE html>
 
@@ -15,7 +15,9 @@
     <link href="css/aeroquad.css" rel="stylesheet" />
 
     <script src="js/jquery-2.2.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script></head>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/aeroquad.js"></script>
+</head>
 <body role="document">
     <form runat="server">
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -74,6 +76,8 @@
         </div>
         <div class="tag">
             <span>Mag Raw Value Z Axis</span><asp:TextBox ID="TextBox14" runat="server"></asp:TextBox>
+        </div>
+        <div id="divStatus">
         </div>
     </div>
     </form>

@@ -1,4 +1,4 @@
-﻿namespace Scada.Comm.KP.AeroQuad
+﻿namespace Scada.Comm.Devices.KpAeroQuad
 {
     partial class FrmControl
     {

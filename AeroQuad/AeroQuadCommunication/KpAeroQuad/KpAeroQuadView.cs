@@ -1,5 +1,6 @@
-﻿using Scada.Comm.KP.AeroQuad;
-namespace Scada.Comm.KP
+﻿using Scada.Comm.Devices.KpAeroQuad;
+
+namespace Scada.Comm.Devices
 {
     public class KpAeroQuadView : KPView
     {
@@ -12,8 +13,8 @@ namespace Scada.Comm.KP
             : base(number)
         {
             CanShowProps = true;
-            DefaultReqParams = new KPLogic.ReqParams(false) { Timeout = 1000, Delay = 0 };
         }
+
 
         public override string KPDescr
         {
@@ -26,9 +27,17 @@ namespace Scada.Comm.KP
             }
         }
 
+        public override KPReqParams DefaultReqParams
+        {
+            get
+            {
+                return new KPReqParams() { Timeout = 1000, Delay = 0 };
+            }
+        }
+
         public override void ShowProps()
         {
-            FrmControl.ShowDialog(Number, CmdDir);
+            FrmControl.ShowDialog(Number, AppDirs.CmdDir);
         }
     }
 }

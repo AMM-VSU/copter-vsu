@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Scada.Web.plugins.AeroQuad {
+namespace Scada.Web.Plugins.AeroQuad {
     
     
-    public partial class Default {
+    public partial class WFrmTelemetry {
         
         /// <summary>
         /// btnStartReading control.

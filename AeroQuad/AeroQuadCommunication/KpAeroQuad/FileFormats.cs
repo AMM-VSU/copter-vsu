@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Scada.Comm.KP
+namespace Scada.Comm.Devices
 {
     /// <summary>
     /// Форматы файлов, используемые в исследованиях

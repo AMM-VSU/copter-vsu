@@ -1,9 +1,11 @@
-﻿using Scada.UI;
+﻿using Scada.Comm.Devices;
+using Scada.Data;
+using Scada.UI;
 using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Scada.Comm.KP.AeroQuad
+namespace Scada.Comm.Devices.KpAeroQuad
 {
     /// <summary>
     /// Форма управления и сервиса
@@ -44,13 +46,13 @@ namespace Scada.Comm.KP.AeroQuad
 
         private void btnSend_i_Click(object sender, EventArgs e)
         {
-            KPLogic.Command cmd = new KPLogic.Command(KPLogic.CmdType.Binary);
+            Command cmd = new Command(BaseValues.CmdTypes.Binary);
             cmd.KPNum = kpNum;
             cmd.CmdNum = 1;
             cmd.CmdData = new byte[] { 0x69 }; // символ i
             string msg;
 
-            if (KPUtils.SaveCmd(cmdDir, "KpAeroQuad", cmd, out msg))
+            if (CommUtils.SaveCmd(cmdDir, "KpAeroQuad", cmd, out msg))
                 ScadaUiUtils.ShowInfo(msg);
             else
                 ScadaUiUtils.ShowError(msg);
@@ -58,13 +60,13 @@ namespace Scada.Comm.KP.AeroQuad
 
         private void btnRecordOnOff_Click(object sender, EventArgs e)
         {
-            KPLogic.Command cmd = new KPLogic.Command(KPLogic.CmdType.Standard);
+            Command cmd = new Command(BaseValues.CmdTypes.Standard);
             cmd.KPNum = kpNum;
             cmd.CmdNum = 2;
             cmd.CmdVal = sender == btnRecordOn ? 1.0 : 0.0;
             string msg;
 
-            if (KPUtils.SaveCmd(cmdDir, "KpAeroQuad", cmd, out msg))
+            if (CommUtils.SaveCmd(cmdDir, "KpAeroQuad", cmd, out msg))
                 ScadaUiUtils.ShowInfo(msg);
             else
                 ScadaUiUtils.ShowError(msg);
