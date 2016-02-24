@@ -14,7 +14,7 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="css/aeroquad.css" rel="stylesheet" />
 
-    <script src="js/jquery-2.2.0.min.js"></script>
+    <script src="js/jquery-1.12.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/aeroquad.js"></script>
 </head>

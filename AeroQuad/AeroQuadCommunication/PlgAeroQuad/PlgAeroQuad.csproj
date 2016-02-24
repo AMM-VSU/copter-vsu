@@ -64,6 +64,7 @@
     <Content Include="plugins\AeroQuad\css\aeroquad.css" />
     <Content Include="plugins\AeroQuad\css\bootstrap-theme.min.css" />
     <Content Include="plugins\AeroQuad\css\bootstrap.min.css" />
+    <Content Include="plugins\AeroQuad\js\jquery-1.12.1.min.js" />
     <Content Include="plugins\AeroQuad\Telemetry.aspx" />
     <Content Include="plugins\AeroQuad\js\aeroquad.js" />
     <Content Include="plugins\AeroQuad\js\bootstrap.min.js" />

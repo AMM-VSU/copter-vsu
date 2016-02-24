@@ -15,8 +15,9 @@ function receiveCurData() {
 
             success: function (data) {
                 if (data.d == "") {
-                    console.log("Empty data received. Data service error");
-                    showError();
+                    var msg = "Empty data received. Data service error";
+                    console.log(msg);
+                    showError(msg);
                 } else {
                     console.log("Data received successfully");
                     console.log(data.d);
@@ -26,8 +27,9 @@ function receiveCurData() {
             },
 
             error: function (result) {
-                console.log("Error: " + result.status + " " + result.statusText);
-                showError();
+                var msg = "Error: " + result.status + " " + result.statusText;
+                console.log(msg);
+                showError(msg);
             },
 
             complete: function () {
@@ -88,8 +90,8 @@ function getColor(val) {
 }
 
 // Вывести сообщение об ошибке
-function showError() {
-    $("#divStatus").text("Error! See Console for the details.");
+function showError(msg) {
+    $("#divStatus").text(msg);
 }
 
 $(document).ready(function () {

@@ -74,7 +74,7 @@ namespace Scada.Web.Plugins.AeroQuad
         public void StartReading()
         {
             bool result;
-            AppData.MainData.ServerComm.SendBinaryCommand(UserID, RecordOutCnlNum, new byte[] { 0x69 }, out result);
+            AppData.MainData.ServerComm.SendBinaryCommand(UserID, SendDataOutCnlNum, new byte[] { 0x69 }, out result);
         }
 
         [OperationContract]
