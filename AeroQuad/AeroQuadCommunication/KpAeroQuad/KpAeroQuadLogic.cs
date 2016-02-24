@@ -75,6 +75,11 @@ namespace Scada.Comm.Devices
         /// </summary>
         private bool DecodeResponse()
         {
+            // принимаемые данные имеют вид:
+            // -0.00,-0.00,-0.00,0.05,0.13,-9.85,0,0,0,<0D><0A>
+            // [Roll Gyro Rate],[Pitch Gyro Rate],[Yaw Gyro Rate],[Accel X Axis],[Accel Y Axis],[Accel Z Axis],[Magnetometer Raw Value X Axis],[Magnetometer Raw Value Y Axis],[Magnetometer Raw Value Z Axis]\r\n 
+            // http://aeroquad.com/showwiki.php?title=Serial-Commands:-AeroQuad-Ground-Station-Interface-Definitions
+
             bool decodeOK = true;
 
             try
