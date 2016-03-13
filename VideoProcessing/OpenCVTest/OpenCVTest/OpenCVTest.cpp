@@ -11,6 +11,11 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
+	// How to build applications with OpenCV inside the Microsoft Visual Studio:
+	// http://docs.opencv.org/2.4/doc/tutorials/introduction/windows_visual_studio_Opencv/windows_visual_studio_Opencv.html#windows-visual-studio-how-to
+	// Required environment variable:
+	// OPENCV_DIR - full path to opencv\build\x64\vc14
+
 	if (argc != 2)
 	{
 		cout << "Usage: display_image ImageToLoadAndDisplay" << endl;
