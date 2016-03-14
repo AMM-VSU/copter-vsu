@@ -32,13 +32,13 @@ void Threshold_Demo(int, void*);
 int main(int argc, char** argv)
 {
 	/// Load an image
-	src = imread(argv[1], 1);
+	src = imread(argv[1], CV_LOAD_IMAGE_COLOR); // CV_LOAD_IMAGE_GRAYSCALE - loads the image as an intensity one
 
 	/// Convert the image to Gray
 	cvtColor(src, src_gray, CV_BGR2GRAY);
 
 	/// Create a window to display results
-	namedWindow(window_name, CV_WINDOW_AUTOSIZE);
+	namedWindow(window_name, CV_WINDOW_AUTOSIZE /*CV_WINDOW_NORMAL*/);
 
 	/// Create Trackbar to choose type of Threshold
 	createTrackbar(trackbar_type,
